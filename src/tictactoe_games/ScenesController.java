@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tictactoe_games;
 
 import java.awt.event.MouseEvent;
@@ -44,10 +40,9 @@ public class ScenesController {
        
     }
    
-    
-    public void switchToSignup(ActionEvent event){
+      public void switchToPlayVSComputer(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("FXMLSignup.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("FXMLPlayWithComputer.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -56,6 +51,76 @@ public class ScenesController {
             e.printStackTrace();
         }
     }
+    public void switchToPlayVSFriend(ActionEvent event){
+        try{
+             Parent root = FXMLLoader.load(getClass().getResource("FXMLPlayWithFriend.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+     
+       public void switchToPlayOnline(ActionEvent event){
+        try{
+             Parent root = FXMLLoader.load(getClass().getResource("FXMLPlayOnline.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+           public void switchToRecordsList(ActionEvent event){
+        try{
+             Parent root = FXMLLoader.load(getClass().getResource("FXMLGameForm.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+          public void switchToRankList(ActionEvent event){
+        try{
+             Parent root = FXMLLoader.load(getClass().getResource("FXMLGameForm.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+          public void switchToHome(ActionEvent event){
+        try{
+             Parent root = FXMLLoader.load(getClass().getResource("FXMLHome.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+           public void switchToChooseX_O(ActionEvent event){
+        try{
+             Parent root = FXMLLoader.load(getClass().getResource("FXMLChoose_X_O.fxml")); 
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+       
+       
+    
     
     public void switchToLoginForm(ActionEvent event){
         try{
