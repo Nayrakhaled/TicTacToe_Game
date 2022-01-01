@@ -34,6 +34,12 @@ public class ScenesController {
     private ImageView registerLogo;
     
     
+    
+    
+    
+    
+    
+    
     public ScenesController(){
        
     }
