@@ -16,7 +16,7 @@
       <Rectangle arcHeight="90.0" arcWidth="90.0" fill="#ffffff00" height="217.0" layoutX="71.0" layoutY="84.0" stroke="BLACK" strokeType="INSIDE" width="448.0" />
       <ImageView fx:id="loginLogo" fitHeight="88.0" fitWidth="105.0" layoutX="257.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../ITI_%209%20Months/Java/project/Images/download.png" />
+            <Image url="@../Images/Icon.png" />
          </image>
       </ImageView>
       <Label layoutX="95.0" layoutY="158.0" text="User Name">

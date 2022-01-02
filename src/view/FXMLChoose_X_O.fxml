@@ -2,46 +2,41 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Tic-Tac-Teo" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScenesController">
-   <content>
-      <AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="600.0">
-         <children>
-            <Label layoutX="220.0" layoutY="129.0" prefHeight="35.0" prefWidth="161.0" text="Choose x or O">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label contentDisplay="CENTER" layoutX="116.0" layoutY="164.0" prefHeight="61.0" prefWidth="418.0" text="Would you like to play with X or O?">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Button fx:id="Choose_X_O_btn_x" layoutX="150.0" layoutY="280.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="95.0" text="X">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
-            <Button fx:id="Choose_X_O_btn_O" layoutX="347.0" layoutY="280.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="104.0" text="O">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Button>
-            <Button fx:id="ChooseX_O_btnBack" layoutX="55.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchToHome">
-               <graphic>
-                  <ImageView fx:id="Lose_backButton" fitHeight="28.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Images/back.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </AnchorPane>
-   </content>
-</TitledPane>
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScenesController">
+   <children>
+      <Label fx:id="ChooseX_O_Label" layoutX="220.0" layoutY="129.0" prefHeight="35.0" prefWidth="161.0" text="Choose x or O">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="ChooseX_O_Lable_Qestion" contentDisplay="CENTER" layoutX="116.0" layoutY="164.0" prefHeight="61.0" prefWidth="418.0" text="Would you like to play with X or O?">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="Choose_X_O_btn_x" layoutX="150.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToPlayVSComputer" prefHeight="55.0" prefWidth="95.0" text="X">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="Choose_X_O_btn_O" layoutX="347.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToPlayVSFriend" prefHeight="55.0" prefWidth="104.0" text="O">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="ChooseX_O_btnBack" layoutX="55.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchToHome">
+         <graphic>
+            <ImageView fx:id="ChooseX_O_backButtonImg" fitHeight="28.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
