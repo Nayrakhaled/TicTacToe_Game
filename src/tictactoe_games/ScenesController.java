@@ -28,13 +28,9 @@ public class ScenesController {
     @FXML
     private TextField registerTxt_ComfirmPass;
     private ImageView registerLogo;
-    
-    
-    
-    
-    
-    
-    
+
+
+
     
     public ScenesController(){
        
