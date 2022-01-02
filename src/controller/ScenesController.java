@@ -38,7 +38,7 @@ public class ScenesController {
    
       public void switchToPlayVSComputer(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("FXMLPlayWithComputer.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLPlayWithComputer.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -49,7 +49,7 @@ public class ScenesController {
     }
     public void switchToPlayVSFriend(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("FXMLPlayWithFriend.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLPlayWithFriend.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -61,7 +61,7 @@ public class ScenesController {
      
        public void switchToPlayOnline(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("FXMLPlayOnline.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLPlayOnline.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -72,7 +72,7 @@ public class ScenesController {
     }
            public void switchToRecordsList(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("FXMLGameForm.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLGameForm.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -83,7 +83,7 @@ public class ScenesController {
     }
           public void switchToRankList(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("FXMLGameForm.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLGameForm.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -94,7 +94,7 @@ public class ScenesController {
     }
           public void switchToHome(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("FXMLHome.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLHome.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -105,7 +105,7 @@ public class ScenesController {
     }
            public void switchToChooseX_O(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("FXMLChoose_X_O.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLChoose_X_O.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -120,7 +120,7 @@ public class ScenesController {
     
     public void switchToLoginForm(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLLogin.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
