@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="RegisterPane" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe_games.ScenesController">
+<AnchorPane id="AnchorPane" fx:id="RegisterPane" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScenesController">
    <children>
       <Rectangle arcHeight="90.0" arcWidth="90.0" fill="#ffffff00" height="236.0" layoutX="71.0" layoutY="84.0" stroke="BLACK" strokeType="INSIDE" width="448.0" />
       <ImageView fx:id="registerLogo" fitHeight="161.0" fitWidth="212.0" layoutX="204.0" layoutY="-17.0" onMousePressed="#switchToLoginForm" pickOnBounds="true" preserveRatio="true">

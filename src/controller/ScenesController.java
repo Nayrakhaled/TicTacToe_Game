@@ -1,5 +1,5 @@
 
-package tictactoe_games;
+package controller;
 
 import java.awt.event.MouseEvent;
 import javafx.event.ActionEvent;
