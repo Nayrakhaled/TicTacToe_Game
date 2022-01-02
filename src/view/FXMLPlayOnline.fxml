@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" text="Tic-Tac-Teo" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe_games.ScenesController">
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" text="Tic-Tac-Teo" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScenesController">
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="600.0">
          <children>
@@ -36,7 +36,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="45.0" layoutX="87.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="417.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutX="87.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="417.0" />
             <ImageView fitHeight="32.0" fitWidth="47.0" layoutX="102.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/user.png" />
@@ -93,10 +93,12 @@
                   <Hyperlink fx:id="gameforme_Friend" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Hyperlink fx:id="gameForm_p11" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Hyperlink fx:id="gameForm_p01" prefHeight="80.0" prefWidth="122.0" GridPane.rowIndex="1" />
-                  <Hyperlink fx:id="gameForm_p20" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" />
+                  <Hyperlink fx:id="gameForm_PlayOnline" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" />
                   <Hyperlink fx:id="gameForm_p22" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
+            <Circle fill="#34ff1f" layoutX="202.0" layoutY="32.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#34ff1f" layoutX="383.0" layoutY="32.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
          </children></AnchorPane>
   </content>
 </TitledPane>
