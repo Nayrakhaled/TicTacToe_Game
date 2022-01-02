@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rank_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tictactoe_games.RecordListController">
+   <children>
+      <Button fx:id="rank_back_btn" layoutX="24.0" layoutY="17.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="65.0" text="Back " />
+      <Label layoutX="178.0" layoutY="20.0" prefHeight="38.0" prefWidth="245.0" text="PLAYERS RANK">
+         <font>
+            <Font name="Verdana" size="29.0" />
+         </font>
+      </Label>
+      <TableView fx:id="rank_tableview" layoutX="24.0" layoutY="70.0" prefHeight="304.0" prefWidth="547.0">
+         <columns>
+            <TableColumn fx:id="rank_playerid" prefWidth="98.0" text="Player ID" />
+            <TableColumn fx:id="rank_playername" prefWidth="157.0" text="PLAYER NAME" />
+            <TableColumn fx:id="rank_score" prefWidth="108.0" text="SCORE" />
+            <TableColumn fx:id="rank_rank" prefWidth="175.0" text="RANK" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
