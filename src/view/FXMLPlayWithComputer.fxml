@@ -15,18 +15,18 @@
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScenesController">
    <children>
-      <Button fx:id="OnlineBackButton" layoutX="30.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToHome">
+      <Button fx:id="VSComputer_btnBack" layoutX="30.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToHome">
          <graphic>
-            <ImageView fitHeight="27.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="VSComputer_BakImg" fitHeight="27.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/back.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="Online_PlayAgainBtn" layoutX="516.0" layoutY="14.0" mnemonicParsing="false" onAction="#playAgain">
+      <Button fx:id="VSComputerPlayer_PlayAgainBtn" layoutX="516.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToChooseX_O">
          <graphic>
-            <ImageView fitHeight="27.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="VSComputer_btnPlayAgain" fitHeight="27.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/playagain.png" />
                </image>
@@ -34,39 +34,23 @@
          </graphic>
       </Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutX="87.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="417.0" />
-      <ImageView fitHeight="32.0" fitWidth="47.0" layoutX="102.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/user.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="32.0" fitWidth="47.0" layoutX="454.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/user.png" />
          </image>
       </ImageView>
-      <Circle fx:id="OnlinePlayer1Image" fill="#1f93ff00" layoutX="118.0" layoutY="37.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="OnlinePlayer2Image" fill="#1f93ff00" layoutX="470.0" layoutY="37.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="VSComputerPlayerPlayer2Image" fill="#1f93ff00" layoutX="470.0" layoutY="37.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="VSOnlineLable" layoutX="280.0" layoutY="24.0" text="VS">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="OnlinePlayer2UserName" layoutX="395.0" layoutY="22.0" text="Nayera">
+      <Label fx:id="VSComputerPlayer2UserName" layoutX="395.0" layoutY="22.0" text="Nayera">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="OnlinePlayer1UserName" layoutX="148.0" layoutY="22.0" text="Asmaa">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="OnlinePlayer1Score" layoutX="158.0" layoutY="39.0" text="400">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="OnlinePlayer2Score" layoutX="405.0" layoutY="39.0" text="300">
+      <Label fx:id="VSComputerPlayerPlayer2Score" layoutX="405.0" layoutY="39.0" text="300">
          <font>
             <Font size="14.0" />
          </font>
@@ -90,7 +74,7 @@
             <Hyperlink fx:id="gameforme_Friend" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Hyperlink fx:id="gameForm_p11" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Hyperlink fx:id="gameForm_p01" prefHeight="80.0" prefWidth="122.0" GridPane.rowIndex="1" />
-            <Hyperlink fx:id="gameForm_PlayOnline" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" />
+            <Hyperlink fx:id="gameForm_PlayWithComputer" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" />
             <Hyperlink fx:id="gameForm_p22" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
@@ -105,7 +89,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label fx:id="VSComputer" layoutX="130.0" layoutY="23.0" text="Computer" visible="false">
+      <Label fx:id="VSComputer" layoutX="130.0" layoutY="23.0" text="Computer">
          <font>
             <Font size="18.0" />
          </font>

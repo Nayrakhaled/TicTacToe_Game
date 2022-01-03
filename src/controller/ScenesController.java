@@ -10,6 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -41,6 +44,14 @@ public class ScenesController {
     private Circle Online_CirclePlayer2;
     @FXML
     private  Label VSComputer;
+    @FXML 
+    private Button Online_btnRecordung;
+    private ImageView Online_RecordIImage;
+    @FXML 
+    private ImageView OnlinePlayer1Image;
+    @FXML
+    private  Label OnlinePlayer1UserName;
+   private  Label OnlinePlayer1Score;
     
     
     
@@ -55,37 +66,45 @@ public class ScenesController {
    
       public void switchToPlayVSComputer(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLGameForm.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLPlayWithComputer.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
-             VSComputer.setVisible(true);
+            /*OnlinePlayer1Image.setVisible(false);
+            OnlinePlayer1UserName.setVisible(false);
+            OnlinePlayer1Score.setVisible(false);
+            VSComputer.getText();
+            VSComputer.setVisible(true);*/
             stage.show();
            
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-    public void switchToPlayVSFriend(ActionEvent event){
+      public void switchToPlayVSFriend(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLGameForm.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLPlayWithFriend.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+           
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-     
+      
+  
        public void switchToPlayOnline(ActionEvent event){
         try{
-             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLGameForm.fxml")); 
+             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLPlayOnline.fxml")); 
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
-            Online_CirclePlayer1.setVisible(true);
+           /* Online_CirclePlayer1.setVisible(true);
             Online_CirclePlayer2.setVisible(true);
+            Online_btnRecordung.setVisible(true);
+            Online_RecordIImage.setVisible(true);*/
             stage.show();
          
             
@@ -174,6 +193,7 @@ public class ScenesController {
             e.printStackTrace();
         }
     }
+     
     
     
     

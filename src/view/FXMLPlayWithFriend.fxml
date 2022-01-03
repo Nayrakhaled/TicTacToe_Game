@@ -15,18 +15,18 @@
 
 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ScenesController">
    <children>
-      <Button fx:id="OnlineBackButton" layoutX="30.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToHome">
+      <Button fx:id="VSFriend_BackButton" layoutX="30.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToHome">
          <graphic>
-            <ImageView fitHeight="27.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="VSFriend_BackImg" fitHeight="27.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/back.png" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="Online_PlayAgainBtn" layoutX="516.0" layoutY="14.0" mnemonicParsing="false" onAction="#playAgain">
+      <Button fx:id="VSFriend_PlayAgainBtn" layoutX="516.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToChooseX_O">
          <graphic>
-            <ImageView fitHeight="27.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="VSFriend_PlayAgainImg" fitHeight="27.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/playagain.png" />
                </image>
@@ -44,29 +44,29 @@
             <Image url="@../Images/user.png" />
          </image>
       </ImageView>
-      <Circle fx:id="OnlinePlayer1Image" fill="#1f93ff00" layoutX="118.0" layoutY="37.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="OnlinePlayer2Image" fill="#1f93ff00" layoutX="470.0" layoutY="37.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label fx:id="VSOnlineLable" layoutX="280.0" layoutY="24.0" text="VS">
+      <Circle fx:id="VSFriend_Player1Image" fill="#1f93ff00" layoutX="118.0" layoutY="37.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="VSFriend_Player2Image" fill="#1f93ff00" layoutX="470.0" layoutY="37.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="VSFriend_VSLable" layoutX="280.0" layoutY="24.0" text="VS">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="OnlinePlayer2UserName" layoutX="395.0" layoutY="22.0" text="Nayera">
+      <Label fx:id="VSFriend_Player2UserName" layoutX="395.0" layoutY="22.0" text="Nayera">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="OnlinePlayer1UserName" layoutX="148.0" layoutY="22.0" text="Asmaa">
+      <Label fx:id="VSFriend_UserName" layoutX="148.0" layoutY="22.0" text="Asmaa">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="OnlinePlayer1Score" layoutX="158.0" layoutY="39.0" text="400">
+      <Label fx:id="VSFriend_Player1Score" layoutX="158.0" layoutY="39.0" text="400">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label fx:id="OnlinePlayer2Score" layoutX="405.0" layoutY="39.0" text="300">
+      <Label fx:id="VSFriend_Player2Score" layoutX="405.0" layoutY="39.0" text="300">
          <font>
             <Font size="14.0" />
          </font>
@@ -90,25 +90,9 @@
             <Hyperlink fx:id="gameforme_Friend" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Hyperlink fx:id="gameForm_p11" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Hyperlink fx:id="gameForm_p01" prefHeight="80.0" prefWidth="122.0" GridPane.rowIndex="1" />
-            <Hyperlink fx:id="gameForm_PlayOnline" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" />
+            <Hyperlink fx:id="gameForm_PlayVSFriend" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" />
             <Hyperlink fx:id="gameForm_p22" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Circle fx:id="Online_CirclePlayer1" fill="#34ff1f" layoutX="202.0" layoutY="32.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-      <Circle fx:id="Online_CirclePlayer2" fill="#34ff1f" layoutX="383.0" layoutY="32.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-      <Button fx:id="Online_btnRecordung" layoutX="21.0" layoutY="352.0" mnemonicParsing="false" onAction="#switchToPlayOnline" prefHeight="53.0" prefWidth="55.0" visible="false">
-         <graphic>
-            <ImageView fx:id="Online_RecordIImage" fitHeight="45.0" fitWidth="89.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/icons8-video-record-50.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Label fx:id="VSComputer" layoutX="130.0" layoutY="23.0" text="Computer" visible="false">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

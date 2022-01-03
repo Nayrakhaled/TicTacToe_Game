@@ -19,7 +19,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="Choose_X_O_btn_x" layoutX="150.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToPlayVSComputer" prefHeight="55.0" prefWidth="95.0" text="X">
+      <Button fx:id="Choose_X_O_btn_x" layoutX="154.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToPlayVSComputer" prefHeight="55.0" prefWidth="95.0" text="X">
          <font>
             <Font size="24.0" />
          </font>
