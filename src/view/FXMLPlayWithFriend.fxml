@@ -83,43 +83,15 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Hyperlink fx:id="gameForm_p10" alignment="CENTER" onAction="#play" prefHeight="80.0" prefWidth="122.0" underline="false" GridPane.columnIndex="1">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font></Hyperlink>
-            <Hyperlink fx:id="gameForm_p12" alignment="CENTER" onAction="#play" prefHeight="80.0" prefWidth="122.0" underline="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font></Hyperlink>
-            <Hyperlink fx:id="gameForm_p02" alignment="CENTER" onAction="#play" prefHeight="80.0" prefWidth="122.0" underline="false" GridPane.rowIndex="2">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font></Hyperlink>
-            <Hyperlink fx:id="gameForm_p21" alignment="CENTER" onAction="#play" prefHeight="80.0" prefWidth="122.0" underline="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font></Hyperlink>
-            <Hyperlink fx:id="gameForm_p11" alignment="CENTER" onAction="#play" prefHeight="80.0" prefWidth="122.0" underline="false" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font></Hyperlink>
-            <Hyperlink fx:id="gameForm_p01" alignment="CENTER" onAction="#play" prefHeight="80.0" prefWidth="122.0" underline="false" GridPane.rowIndex="1">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font></Hyperlink>
-            <Hyperlink fx:id="gameForm_p20" alignment="CENTER" onAction="#play" prefHeight="80.0" prefWidth="122.0" underline="false" GridPane.columnIndex="2">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font></Hyperlink>
-            <Hyperlink fx:id="gameForm_p22" alignment="CENTER" onAction="#play" prefHeight="80.0" prefWidth="122.0" underline="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font></Hyperlink>
-            <Hyperlink fx:id="gameForm_p00" alignment="CENTER" onAction="#play" prefHeight="80.0" prefWidth="122.0" underline="false">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Hyperlink>
+            <Hyperlink fx:id="gameForm_p00" prefHeight="80.0" prefWidth="122.0" textFill="#e40c0c" />
+            <Hyperlink fx:id="gameForm_p10" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="1" />
+            <Hyperlink fx:id="gameForm_p12" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Hyperlink fx:id="gameForm_p02" prefHeight="80.0" prefWidth="122.0" GridPane.rowIndex="2" />
+            <Hyperlink fx:id="gameforme_Friend" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Hyperlink fx:id="gameForm_p11" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Hyperlink fx:id="gameForm_p01" prefHeight="80.0" prefWidth="122.0" GridPane.rowIndex="1" />
+            <Hyperlink fx:id="gameForm_PlayVSFriend" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" />
+            <Hyperlink fx:id="gameForm_p22" prefHeight="80.0" prefWidth="122.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

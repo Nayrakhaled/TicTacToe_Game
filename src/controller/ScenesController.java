@@ -1,7 +1,9 @@
 package controller;
 
+import Module.Player;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -38,10 +41,11 @@ public class ScenesController {
     //Registration Form Component
     @FXML
     private TextField registerTxt_userName;
+    private Label errorlogin_label;
     @FXML
-    private TextField registertxt_password;
+    private PasswordField registertxt_password;
     @FXML
-    private TextField registerTxt_ComfirmPass;
+    private PasswordField registerTxt_ComfirmPass;
     private ImageView registerLogo;
     @FXML
     private Circle Online_CirclePlayer1;
@@ -93,6 +97,13 @@ public class ScenesController {
     @FXML
     private Hyperlink vsPcGameForm_p22;
 
+    @FXML
+    private TextField loginTxt_userName;
+    @FXML
+    private TextField logintxt_password;
+
+    @FXML
+    private Label registerlabel_NotMatch;
     // other component
     private Hyperlink gameForm_p00;
     private Hyperlink gameForm_p01;
@@ -103,6 +114,12 @@ public class ScenesController {
     private Hyperlink gameForm_p20;
     private Hyperlink gameForm_p21;
     private Hyperlink gameForm_p22;
+
+    Hyperlink[][] hyperList = {{gameForm_p00, gameForm_p10, gameForm_p20},
+    {gameForm_p01, gameForm_p11, gameForm_p21},
+    {gameForm_p02, gameForm_p12, gameForm_p22}
+
+    };
     private GridPane gridGame;
     private Label VSComputerPlayer2UserName;
     private Label VSComputer;
@@ -114,10 +131,10 @@ public class ScenesController {
     boolean isPlayerWin = false;
     int xoCounter = 0;
     String initialStart = "X";
+    public static Socket socket;
     HashMap<String, String> pos = new HashMap<String, String>();
 
     public ScenesController() {
-
     }
 
     public void switchToPlayVSComputer(ActionEvent event) {
@@ -126,11 +143,6 @@ public class ScenesController {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
-            /*OnlinePlayer1Image.setVisible(false);
-            OnlinePlayer1UserName.setVisible(false);
-            OnlinePlayer1Score.setVisible(false);
-            VSComputer.getText();
-            VSComputer.setVisible(true);*/
             stage.show();
 
         } catch (Exception e) {
@@ -157,10 +169,6 @@ public class ScenesController {
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
-            /* Online_CirclePlayer1.setVisible(true);
-            Online_CirclePlayer2.setVisible(true);
-            Online_btnRecordung.setVisible(true);
-            Online_RecordIImage.setVisible(true);*/
             stage.show();
 
         } catch (Exception e) {
@@ -218,6 +226,7 @@ public class ScenesController {
 
     public void switchToSignup(ActionEvent event) {
         try {
+            socket = new Socket("127.0.0.1", 63000);
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLSignup.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -240,7 +249,27 @@ public class ScenesController {
         }
     }
 
-    public void switchToAvailableList(ActionEvent event) {
+    public void goToAvailableList(ActionEvent event) {
+        if (!loginTxt_userName.getText().isEmpty() && !logintxt_password.getText().isEmpty()) {
+            Player player = new Player(loginTxt_userName.getText(), logintxt_password.getText());
+            LoginController enter = new LoginController();
+            int check = enter.checkData(player, socket);
+            System.out.println("Check" + check);
+            if (check == 1) {
+                availableList(event);
+            } else if (check == -1){
+                errorlogin_label.setText("");
+                errorlogin_label.setVisible(true);
+                errorlogin_label.setText("Username Not Exist");
+            }else if (check == 0){ 
+                errorlogin_label.setText("");
+                errorlogin_label.setVisible(true);
+                errorlogin_label.setText("Password Not Exist");
+            }
+        }
+    }
+
+    public void availableList(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLAvailableListForm.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -249,6 +278,28 @@ public class ScenesController {
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void switchToAvailableList(ActionEvent event) {
+        if (!registerTxt_userName.getText().isEmpty()
+                && !registertxt_password.getText().isEmpty() && !registerTxt_ComfirmPass.getText().isEmpty()) {
+            if (registertxt_password.getText().equals(registerTxt_ComfirmPass.getText())) {
+                Player player = new Player(registerTxt_userName.getText(), registertxt_password.getText(), registerTxt_ComfirmPass.getText());
+                RegieterController enter = new RegieterController();
+                boolean check = enter.checkData(player, socket);
+                if (check == true) {
+                    availableList(event);
+                }
+            } else {
+                registerlabel_NotMatch.setText("");
+                registerlabel_NotMatch.setVisible(true);
+                registerlabel_NotMatch.setText("Not Match");
+            }
+        } else {
+            registerlabel_NotMatch.setText("");
+            registerlabel_NotMatch.setVisible(true);
+            registerlabel_NotMatch.setText("Field is emplty");
         }
     }
 
@@ -272,42 +323,38 @@ public class ScenesController {
         }
     }
 
-    public void Play(ActionEvent event) {
+    public void play(ActionEvent event) {
         Hyperlink l = (Hyperlink) event.getSource();
         String id = l.getId();
 
-        //System.out.println(l);
-        // System.out.println(id);
         l.setText(initialStart);
-        String value = l.getText();
-        l.setOnAction(null);
-        pos.put(id, value);
+        /*
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.println(hyperList[i][j].toString());
+                if (hyperList[i][j].toString() == l.getId()) {
+                    hyperList[i][j].setText(initialStart);
+                    System.out.println(hyperList[i][j].getText());
+                    System.out.println(i + j);
+                }else{
+                    System.out.println("NOooooooooooooooooooooo");
+                }
+            }
+        }*/
 
         if (initialStart.equals("X")) {
             l.setTextFill(Color.RED);
             initialStart = "O";
-           boolean y =  checkForWinner();
-           clearToPlayAgain(y,event);
+            boolean y = checkForWinner();
+            clearToPlayAgain(y, event);
             xoCounter++;
         } else {
             l.setTextFill(Color.BLUE);
             initialStart = "X";
-            boolean y =  checkForWinner();
-           clearToPlayAgain(y,event);
+            boolean y = checkForWinner();
+            clearToPlayAgain(y, event);
             xoCounter++;
         }
-
-        //System.out.print(vsPcGameForm_p00.getText().toString());
-        //checkForWinner();
-        /*
-      for (String i : pos.keySet()) {
-        System.out.println("key: " + i + " value: " + pos.get(i));
-      }
-      System.out.println("__________________________");
-         */
-        // System.out.println(pos);
-        //System.out.println(pos.get("vsPcGameForm_p00"));
-        //System.out.println(pos.get("vsPcGameForm_p10"));
     }
 
     public boolean checkForWinner() {
@@ -325,74 +372,80 @@ public class ScenesController {
 
         String getXorO = null;
 
-        if (isPlayerWin==false && xoCounter < 9) {
+        if (isPlayerWin == false && xoCounter < 9) {
             //System.out.print("Game continue");
+/*
+            // Win Column 
+            for (int i = 0; i < 3; i++) {
+                if (hyperList[0][i].getText().equals(hyperList[1][i].getText()) && hyperList[0][i].getText().equals(hyperList[2][i].getText()) && (!hyperList[0][i].getText().isEmpty())) {
+
+                    getXorO = gameGrid00;
+                    System.out.println("Winner");
+                    isPlayerWin = true;
+                }
+            }
+             */
             if ((vsPcGameForm_p00.getText().equals(vsPcGameForm_p10.getText())) && (vsPcGameForm_p00.getText().equals(vsPcGameForm_p20.getText())) && (!vsPcGameForm_p00.getText().isEmpty())) {
-               
+
                 getXorO = gameGrid00;
                 System.out.println("Winner");
-                 isPlayerWin = true;
+                isPlayerWin = true;
             } else if ((vsPcGameForm_p01.getText().equals(vsPcGameForm_p11.getText())) && (vsPcGameForm_p01.getText().equals(vsPcGameForm_p21.getText())) && (!vsPcGameForm_p01.getText().isEmpty())) {
-               
+
                 getXorO = gameGrid00;
                 System.out.println("Winner");
-                 isPlayerWin = true;
+                isPlayerWin = true;
             } else if ((vsPcGameForm_p02.getText().equals(vsPcGameForm_p12.getText())) && (vsPcGameForm_p02.getText().equals(vsPcGameForm_p22.getText())) && (!vsPcGameForm_p02.getText().isEmpty())) {
-                
+
                 getXorO = gameGrid00;
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p00.getText().equals(vsPcGameForm_p01.getText())) && (vsPcGameForm_p00.getText().equals(vsPcGameForm_p02.getText())) && (!vsPcGameForm_p00.getText().isEmpty())) {
-                
+
                 getXorO = gameGrid00;
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p10.getText().equals(vsPcGameForm_p11.getText())) && (vsPcGameForm_p10.getText().equals(vsPcGameForm_p12.getText())) && (!vsPcGameForm_p10.getText().isEmpty())) {
-              
+
                 getXorO = gameGrid00;
                 System.out.println("Winner");
-                  isPlayerWin = true;
+                isPlayerWin = true;
             } else if ((vsPcGameForm_p20.getText().equals(vsPcGameForm_p21.getText())) && (vsPcGameForm_p20.getText().equals(vsPcGameForm_p22.getText())) && (!vsPcGameForm_p20.getText().isEmpty())) {
-                
+
                 getXorO = gameGrid00;
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p20.getText().equals(vsPcGameForm_p11.getText())) && (vsPcGameForm_p20.getText().equals(vsPcGameForm_p02.getText())) && (!vsPcGameForm_p20.getText().isEmpty())) {
-                
+
                 getXorO = gameGrid00;
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p00.getText().equals(vsPcGameForm_p11.getText())) && (vsPcGameForm_p00.getText().equals(vsPcGameForm_p22.getText())) && (!vsPcGameForm_p00.getText().isEmpty())) {
-                
+
                 getXorO = gameGrid00;
                 System.out.println("Winner");
                 isPlayerWin = true;
             }
             //boolean x = true;
-            
-
         }
         return isPlayerWin;
     }
 
     private void clearToPlayAgain(boolean x, ActionEvent event) {
 
-       if(x== true){
-           System.out.println("Win");
-            try{
-                    Thread.sleep(2000);
-                    Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLWin.fxml")); 
-                   stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                   scene = new Scene(root);
-                   stage.setScene(scene);
-                   stage.show();
-                }
-                catch(Exception e){
-                   e.printStackTrace();
-                }
-       }
-       
- 
+        if (x == true) {
+            System.out.println("Win");
+            try {
+                Thread.sleep(2000);
+                Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLWin.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
