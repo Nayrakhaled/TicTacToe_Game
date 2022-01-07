@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.DoubleProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,6 +24,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -66,6 +70,9 @@ public class ScenesController {
     private Label gameForm1_p00;
     @FXML
     private Label gameForm1_p10;
+
+    @FXML
+    private ListView listviewAvailable;
 
     @FXML
     private Label label00;
@@ -127,7 +134,7 @@ public class ScenesController {
     private Label VSComputer_pcScore;
 
     String Winner = null;
-    String player;
+    public static Player playerOnline = new Player(); // to know current user online 
     boolean isPlayerWin = false;
     int xoCounter = 0;
     String initialStart = "X";
@@ -212,6 +219,23 @@ public class ScenesController {
         }
     }
 
+    public void switchToHomeOnline(ActionEvent event) {// back to change mode(avaliable list to home to change mode)
+
+        System.out.println("current online player" + playerOnline.getUserName());
+        ModeController change = new ModeController();
+        int result = change.changeMode(playerOnline, socket);
+        System.out.println("result of mode client" + result);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLHome.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void switchToChooseX_O(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLChoose_X_O.fxml"));
@@ -257,27 +281,17 @@ public class ScenesController {
             System.out.println("Check" + check);
             if (check == 1) {
                 availableList(event);
-            } else if (check == -1){
+                playerOnline.setUserName(player.getUserName());
+                System.out.println("player online" + playerOnline.getUserName());
+            } else if (check == -1) {
                 errorlogin_label.setText("");
                 errorlogin_label.setVisible(true);
                 errorlogin_label.setText("Username Not Exist");
-            }else if (check == 0){ 
-                errorlogin_label.setText("");
+            } else if (check == 0) {
+                //errorlogin_label.setText("");
                 errorlogin_label.setVisible(true);
                 errorlogin_label.setText("Password Not Exist");
             }
-        }
-    }
-
-    public void availableList(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLAvailableListForm.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -290,6 +304,9 @@ public class ScenesController {
                 boolean check = enter.checkData(player, socket);
                 if (check == true) {
                     availableList(event);
+                    playerOnline.setUserName(player.getUserName());
+                    System.out.println("player online" + player.getUserName());
+
                 }
             } else {
                 registerlabel_NotMatch.setText("");
@@ -300,6 +317,45 @@ public class ScenesController {
             registerlabel_NotMatch.setText("");
             registerlabel_NotMatch.setVisible(true);
             registerlabel_NotMatch.setText("Field is emplty");
+        }
+    }
+
+    public void availableList(ActionEvent event) {
+        AvialableListController list = new AvialableListController(socket);
+        ArrayList<String> onlineList = new ArrayList<>();
+        onlineList = list.getPlayerOnline();
+
+        //for (String online : onlineList) {
+        //  System.out.println(online);
+        // listviewAvailable = new ListView();
+        // listviewAvailable.getItems().addAll("11111111111111111", "22222222222222","333333333333");
+        //}
+        ObservableList<String> wordsList = FXCollections.observableArrayList();
+        wordsList.add("First Word Definition of First Word");
+        wordsList.add("Second WordDefinition of Second Word");
+        wordsList.add("Third WordDefinition of Third Word");
+        ListView<String> listViewOfWords = new ListView<>(wordsList);
+        listViewOfWords.setCellFactory(param -> new ListCell<String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null ) {
+                    setText(null);
+                } else {
+                    setText("nnnnnnnnnnnnnnnnnnnnnnn");
+                }
+            }
+        });
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLAvailableListForm.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            new AvialableListController(socket);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

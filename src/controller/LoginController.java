@@ -45,6 +45,10 @@ public class LoginController {
             System.out.println("result of client" + resultOfLogin);
             if (resultOfLogin.equals("1")) { // Exist
                 isCheck = 1;
+                //player.setMode(1);
+//                ModeController mode = new ModeController();
+  //              int result = mode.changeMode(player, socket);
+//                System.out.println("result of mode in client login" + result);
                 Alert a = new Alert(Alert.AlertType.NONE);
                 // action event
                 EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
