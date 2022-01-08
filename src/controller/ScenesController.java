@@ -4,9 +4,11 @@ import Module.Player;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.DoubleProperty;
@@ -16,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,7 +27,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -72,9 +74,6 @@ public class ScenesController {
     private Label gameForm1_p10;
 
     @FXML
-    private ListView listviewAvailable;
-
-    @FXML
     private Label label00;
     private Label label01;
     private Label label02;
@@ -105,12 +104,16 @@ public class ScenesController {
     private Hyperlink vsPcGameForm_p22;
 
     @FXML
+    Hyperlink test;
+
+    @FXML
     private TextField loginTxt_userName;
     @FXML
     private TextField logintxt_password;
 
     @FXML
     private Label registerlabel_NotMatch;
+
     // other component
     private Hyperlink gameForm_p00;
     private Hyperlink gameForm_p01;
@@ -132,7 +135,6 @@ public class ScenesController {
     private Label VSComputer;
     private Label VSComputerPlayerPlayer2Score;
     private Label VSComputer_pcScore;
-
     String Winner = null;
     public static Player playerOnline = new Player(); // to know current user online 
     boolean isPlayerWin = false;
@@ -142,6 +144,9 @@ public class ScenesController {
     HashMap<String, String> pos = new HashMap<String, String>();
 
     public ScenesController() {
+        // labelAViewAvailable = new Label();
+        //listviewAvailable = new ListView();
+
     }
 
     public void switchToPlayVSComputer(ActionEvent event) {
@@ -218,8 +223,9 @@ public class ScenesController {
             e.printStackTrace();
         }
     }
-
-    public void switchToHomeOnline(ActionEvent event) {// back to change mode(avaliable list to home to change mode)
+/*
+    
+    public void switchToHomeOnline(ActionEvent event) {// back to change mode(avaliable list to home to change mode 0)
 
         System.out.println("current online player" + playerOnline.getUserName());
         ModeController change = new ModeController();
@@ -235,7 +241,7 @@ public class ScenesController {
             e.printStackTrace();
         }
     }
-
+*/
     public void switchToChooseX_O(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLChoose_X_O.fxml"));
@@ -275,14 +281,16 @@ public class ScenesController {
 
     public void goToAvailableList(ActionEvent event) {
         if (!loginTxt_userName.getText().isEmpty() && !logintxt_password.getText().isEmpty()) {
-            Player player = new Player(loginTxt_userName.getText(), logintxt_password.getText());
+            Player player = new Player(loginTxt_userName.getText().trim(), logintxt_password.getText());
             LoginController enter = new LoginController();
             int check = enter.checkData(player, socket);
             System.out.println("Check" + check);
             if (check == 1) {
-                availableList(event);
                 playerOnline.setUserName(player.getUserName());
                 System.out.println("player online" + playerOnline.getUserName());
+                availableList(event);
+                System.out.println("player online" );
+
             } else if (check == -1) {
                 errorlogin_label.setText("");
                 errorlogin_label.setVisible(true);
@@ -303,9 +311,10 @@ public class ScenesController {
                 RegieterController enter = new RegieterController();
                 boolean check = enter.checkData(player, socket);
                 if (check == true) {
-                    availableList(event);
                     playerOnline.setUserName(player.getUserName());
                     System.out.println("player online" + player.getUserName());
+
+                    availableList(event);
 
                 }
             } else {
@@ -321,42 +330,16 @@ public class ScenesController {
     }
 
     public void availableList(ActionEvent event) {
-        AvialableListController list = new AvialableListController(socket);
-        ArrayList<String> onlineList = new ArrayList<>();
-        onlineList = list.getPlayerOnline();
-
-        //for (String online : onlineList) {
-        //  System.out.println(online);
-        // listviewAvailable = new ListView();
-        // listviewAvailable.getItems().addAll("11111111111111111", "22222222222222","333333333333");
-        //}
-        ObservableList<String> wordsList = FXCollections.observableArrayList();
-        wordsList.add("First Word Definition of First Word");
-        wordsList.add("Second WordDefinition of Second Word");
-        wordsList.add("Third WordDefinition of Third Word");
-        ListView<String> listViewOfWords = new ListView<>(wordsList);
-        listViewOfWords.setCellFactory(param -> new ListCell<String>() {
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null ) {
-                    setText(null);
-                } else {
-                    setText("nnnnnnnnnnnnnnnnnnnnnnn");
-                }
-            }
-        });
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLAvailableListForm.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-            new AvialableListController(socket);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @FXML
@@ -378,6 +361,8 @@ public class ScenesController {
 
         }
     }
+
+   
 
     public void play(ActionEvent event) {
         Hyperlink l = (Hyperlink) event.getSource();
@@ -504,5 +489,10 @@ public class ScenesController {
         }
 
     }
+    /*
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        listviewAvailable.getItems().addAll("11111111111111111", "22222222222222", "333333333333");
 
+    }*/
 }

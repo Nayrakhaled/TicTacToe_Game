@@ -45,20 +45,11 @@ public class LoginController {
             System.out.println("result of client" + resultOfLogin);
             if (resultOfLogin.equals("1")) { // Exist
                 isCheck = 1;
-                //player.setMode(1);
-//                ModeController mode = new ModeController();
-  //              int result = mode.changeMode(player, socket);
-//                System.out.println("result of mode in client login" + result);
-                Alert a = new Alert(Alert.AlertType.NONE);
-                // action event
-                EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-                    public void handle(ActionEvent e) {
-                        // set alert type
-                        a.setAlertType(Alert.AlertType.CONFIRMATION);
-                        // show the dialog
-                        a.show();
-                    }
-                };
+                player.setMode(isCheck);
+                ModeController mode = new ModeController();
+                int result = mode.changeMode(player, socket);
+                System.out.println("result of mode in client login" + result);
+               
             } else if (resultOfLogin.equals("-1")) { // user not  exist
                 System.out.println("NotExist");
                 isCheck = -1;
@@ -66,7 +57,7 @@ public class LoginController {
                 isCheck = 0;
             }
         } catch (Exception ex) {
-            Logger.getLogger(RegieterController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return isCheck;
     }

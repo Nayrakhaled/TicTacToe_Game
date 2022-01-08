@@ -11,7 +11,7 @@ package Module;
  */
 public class Player {
     
-    private int id, score;
+    private int id, score, busy;
     private String userName, password, confirmPass;
     private int mode;
     

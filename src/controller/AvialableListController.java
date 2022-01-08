@@ -53,35 +53,32 @@ public class AvialableListController {
 
     public ArrayList<String> getPlayerOnline() {
 
-        playerOnline = new ArrayList<>();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        String str = dataInputStream.readLine();
-                        if (!str.equals("1")) {
-                            JSONParser jsonParser = new JSONParser();
-                            System.out.println(str);
-                            JSONObject jsonObject = (JSONObject) jsonParser.parse(str);
-                            JSONArray jsonArray = (JSONArray) jsonObject.get("AvaliableList");
-                            //Iterating the contents of the array
-                            Iterator<String> iterator = jsonArray.iterator();
-                            while (iterator.hasNext()) {
-                                System.out.println(iterator.next());
-                                playerOnline.add(iterator.next());
-                            }
-                        }
-                    } catch (SocketException es) {
+        try {
+            playerOnline = new ArrayList<>();
 
-                    } catch (IOException ex) {
-                        Logger.getLogger(AvialableListController.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(AvialableListController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            String str = dataInputStream.readLine();
+            System.out.println("player onlin11111111111111111e");
+
+            if (!str.equals("1")) {
+                System.out.println("player onlin11111111111111111e");
+
+                JSONParser jsonParser = new JSONParser();
+                System.out.println("xxxxxxxxxx" + str);
+                JSONObject jsonObject = (JSONObject) jsonParser.parse(str);
+                JSONArray jsonArray = (JSONArray) jsonObject.get("AvaliableList");
+                //Iterating the contents of the array
+                Iterator<String> iterator = jsonArray.iterator();
+                while (iterator.hasNext()) {
+                    //  System.out.println(iterator.next());
+                    playerOnline.add(iterator.next());
                 }
             }
-        }).start();
+        } catch (IOException ex) {
+            Logger.getLogger(AvialableListController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AvialableListController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return playerOnline;
     }
 }
