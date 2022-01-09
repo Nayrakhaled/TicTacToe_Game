@@ -2,6 +2,7 @@ package controller;
 
 import Module.Player;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.URL;
@@ -31,7 +32,11 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
@@ -73,16 +78,7 @@ public class ScenesController {
     @FXML
     private Label gameForm1_p10;
 
-    @FXML
-    private Label label00;
-    private Label label01;
-    private Label label02;
-    private Label label10;
-    private Label label11;
-    private Label label12;
-    private Label label20;
-    private Label label21;
-    private Label label22;
+    
     // with Computer 
     @FXML
     private Hyperlink vsPcGameForm_p00;
@@ -102,6 +98,32 @@ public class ScenesController {
     private Hyperlink vsPcGameForm_p21;
     @FXML
     private Hyperlink vsPcGameForm_p22;
+    // Play with friend form
+    @FXML
+    private AnchorPane playWithFriendForm;
+    @FXML
+    private AnchorPane withFreindWin;
+    @FXML
+    private Hyperlink withFriendGameForm_p00;
+    @FXML
+    private Hyperlink withFriendGameForm_p01;
+    @FXML
+    private Hyperlink withFriendGameForm_p02;
+    @FXML
+    private Hyperlink withFriendGameForm_p10;
+    @FXML
+    private Hyperlink withFriendGameForm_p11;
+    @FXML
+    private Hyperlink withFriendGameForm_p12;
+    @FXML
+    private Hyperlink withFriendGameForm_p20;
+    @FXML
+    private Hyperlink withFriendGameForm_p21;
+    @FXML
+    private Hyperlink withFriendGameForm_p22;
+    @FXML
+    private MediaView WinMediaPlayer;
+    
 
     @FXML
     Hyperlink test;
@@ -144,8 +166,7 @@ public class ScenesController {
     HashMap<String, String> pos = new HashMap<String, String>();
 
     public ScenesController() {
-        // labelAViewAvailable = new Label();
-        //listviewAvailable = new ListView();
+        
 
     }
 
@@ -361,47 +382,112 @@ public class ScenesController {
 
         }
     }
-
-   
-
+    
     public void play(ActionEvent event) {
         Hyperlink l = (Hyperlink) event.getSource();
         String id = l.getId();
-
         l.setText(initialStart);
-        /*
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                System.out.println(hyperList[i][j].toString());
-                if (hyperList[i][j].toString() == l.getId()) {
-                    hyperList[i][j].setText(initialStart);
-                    System.out.println(hyperList[i][j].getText());
-                    System.out.println(i + j);
-                }else{
-                    System.out.println("NOooooooooooooooooooooo");
-                }
-            }
-        }*/
-
+        l.setOnAction(null);
+        //checkForWinner1();
         if (initialStart.equals("X")) {
             l.setTextFill(Color.RED);
             initialStart = "O";
-            boolean y = checkForWinner();
-            clearToPlayAgain(y, event);
             xoCounter++;
         } else {
             l.setTextFill(Color.BLUE);
             initialStart = "X";
-            boolean y = checkForWinner();
-            clearToPlayAgain(y, event);
+            xoCounter++;
+        }
+    }
+    public void playWithFriend(ActionEvent event) {
+        Hyperlink gameSymbol = (Hyperlink) event.getSource();
+        String id = gameSymbol.getId();
+        gameSymbol.setText(initialStart);
+        gameSymbol.setOnAction(null);
+        checkForWinner();
+        if (initialStart.equals("X")) {
+            gameSymbol.setTextFill(Color.RED);
+            initialStart = "O";
+            xoCounter++;
+        } else {
+            gameSymbol.setTextFill(Color.BLUE);
+            initialStart = "X";
             xoCounter++;
         }
     }
 
-    public boolean checkForWinner() {
+    
+    public void checkForWinner() {
+        String getXorO = null;
 
+        if (xoCounter < 9) { // Game not eneded
+            //System.out.print("Game continue");
+            if ((withFriendGameForm_p00.getText().equals(withFriendGameForm_p10.getText())) && (withFriendGameForm_p00.getText().equals(withFriendGameForm_p20.getText())) && (!withFriendGameForm_p00.getText().isEmpty())) {
+                getXorO = withFriendGameForm_p00.getText();
+                System.out.println("Winner");
+                isPlayerWin = true;
+            } else if ((withFriendGameForm_p01.getText().equals(withFriendGameForm_p11.getText())) && (withFriendGameForm_p01.getText().equals(withFriendGameForm_p21.getText())) && (!withFriendGameForm_p01.getText().isEmpty())) {
+                getXorO = withFriendGameForm_p01.getText();
+                System.out.println("Winner");
+                isPlayerWin = true;
+            } else if ((withFriendGameForm_p02.getText().equals(withFriendGameForm_p12.getText())) && (withFriendGameForm_p02.getText().equals(withFriendGameForm_p22.getText())) && (!withFriendGameForm_p02.getText().isEmpty())) {
+                getXorO = withFriendGameForm_p02.getText();
+                System.out.println("Winner");
+                isPlayerWin = true;
+            } else if ((withFriendGameForm_p00.getText().equals(withFriendGameForm_p01.getText())) && (withFriendGameForm_p00.getText().equals(withFriendGameForm_p02.getText())) && (!withFriendGameForm_p00.getText().isEmpty())) {
+                getXorO = withFriendGameForm_p00.getText();
+                System.out.println("Winner");
+                isPlayerWin = true;
+            } else if ((withFriendGameForm_p10.getText().equals(withFriendGameForm_p11.getText())) && (withFriendGameForm_p10.getText().equals(withFriendGameForm_p12.getText())) && (!withFriendGameForm_p10.getText().isEmpty())) {
+                getXorO = withFriendGameForm_p10.getText();
+                System.out.println("Winner");
+                isPlayerWin = true;
+            } else if ((withFriendGameForm_p20.getText().equals(withFriendGameForm_p21.getText())) && (withFriendGameForm_p20.getText().equals(withFriendGameForm_p22.getText())) && (!withFriendGameForm_p20.getText().isEmpty())) {
+                getXorO = withFriendGameForm_p20.getText();
+                System.out.println("Winner");
+                isPlayerWin = true;
+            } else if ((withFriendGameForm_p20.getText().equals(withFriendGameForm_p11.getText())) && (withFriendGameForm_p20.getText().equals(withFriendGameForm_p02.getText())) && (!withFriendGameForm_p02.getText().isEmpty())) {
+                getXorO = withFriendGameForm_p20.getText();
+                System.out.println("Winner");
+                isPlayerWin = true;
+            } else if ((withFriendGameForm_p00.getText().equals(withFriendGameForm_p11.getText())) && (withFriendGameForm_p00.getText().equals(withFriendGameForm_p22.getText())) && (!withFriendGameForm_p00.getText().isEmpty())) {
+                getXorO = withFriendGameForm_p00.getText();
+                System.out.println("Winner");
+                isPlayerWin = true;
+            }
+        }
+        if (xoCounter == 8 && isPlayerWin == false) {  // game ended without any winner 
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "Game ended without any winner......");
+            a.show();
+            xoCounter = 0;
+        } else {
+            if (isPlayerWin == true) {
+                if (getXorO == "X") {
+                    System.out.println("X is  winner");
+                    playWithFriendForm.setVisible(false);
+                    withFreindWin.setVisible(true); 
+                  //  Media media = new Media(new File("/Images/win.mp4").toURI().toString());  
+                  //  MediaPlayer mediaPlayer = new MediaPlayer(media); 
+                  //  WinMediaPlayer.setMediaPlayer(mediaPlayer);
+                  //  mediaPlayer.setAutoPlay(true);
+                   // WinMediaPlayer = new MediaView(mediaPlayer);
+                    //MediaView mediaView = new MediaView(mediaPlayer);  
+                } else {
+                    System.out.println("O is  winner");
+                    playWithFriendForm.setVisible(false);
+                    withFreindWin.setVisible(true);
+                }
+            }
+        }
+
+    }
+    
+    
+    
+    
+    
+    public void checkForWinner1() {
         String gameGrid00 = pos.get("vsPcGameForm_p00");
-        //System.out.print(gameGrid00);
         String gameGrid01 = pos.get("vsPcGameForm_p01");
         String gameGrid02 = pos.get("vsPcGameForm_p02");
         String gameGrid10 = pos.get("vsPcGameForm_p10");
@@ -410,70 +496,75 @@ public class ScenesController {
         String gameGrid21 = pos.get("vsPcGameForm_p21");
         String gameGrid22 = pos.get("vsPcGameForm_p22");
         String gameGrid20 = pos.get("vsPcGameForm_p20");
-
         String getXorO = null;
 
-        if (isPlayerWin == false && xoCounter < 9) {
+        if (xoCounter < 9) { // Game not eneded
             //System.out.print("Game continue");
-/*
-            // Win Column 
-            for (int i = 0; i < 3; i++) {
-                if (hyperList[0][i].getText().equals(hyperList[1][i].getText()) && hyperList[0][i].getText().equals(hyperList[2][i].getText()) && (!hyperList[0][i].getText().isEmpty())) {
-
-                    getXorO = gameGrid00;
-                    System.out.println("Winner");
-                    isPlayerWin = true;
-                }
-            }
-             */
             if ((vsPcGameForm_p00.getText().equals(vsPcGameForm_p10.getText())) && (vsPcGameForm_p00.getText().equals(vsPcGameForm_p20.getText())) && (!vsPcGameForm_p00.getText().isEmpty())) {
-
-                getXorO = gameGrid00;
+                getXorO = vsPcGameForm_p00.getText();
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p01.getText().equals(vsPcGameForm_p11.getText())) && (vsPcGameForm_p01.getText().equals(vsPcGameForm_p21.getText())) && (!vsPcGameForm_p01.getText().isEmpty())) {
-
-                getXorO = gameGrid00;
+                getXorO = vsPcGameForm_p01.getText();
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p02.getText().equals(vsPcGameForm_p12.getText())) && (vsPcGameForm_p02.getText().equals(vsPcGameForm_p22.getText())) && (!vsPcGameForm_p02.getText().isEmpty())) {
-
-                getXorO = gameGrid00;
+                getXorO = vsPcGameForm_p02.getText();
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p00.getText().equals(vsPcGameForm_p01.getText())) && (vsPcGameForm_p00.getText().equals(vsPcGameForm_p02.getText())) && (!vsPcGameForm_p00.getText().isEmpty())) {
-
-                getXorO = gameGrid00;
+                getXorO = vsPcGameForm_p00.getText();
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p10.getText().equals(vsPcGameForm_p11.getText())) && (vsPcGameForm_p10.getText().equals(vsPcGameForm_p12.getText())) && (!vsPcGameForm_p10.getText().isEmpty())) {
-
-                getXorO = gameGrid00;
+                getXorO = vsPcGameForm_p10.getText();
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p20.getText().equals(vsPcGameForm_p21.getText())) && (vsPcGameForm_p20.getText().equals(vsPcGameForm_p22.getText())) && (!vsPcGameForm_p20.getText().isEmpty())) {
-
-                getXorO = gameGrid00;
+                getXorO = vsPcGameForm_p20.getText();
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p20.getText().equals(vsPcGameForm_p11.getText())) && (vsPcGameForm_p20.getText().equals(vsPcGameForm_p02.getText())) && (!vsPcGameForm_p20.getText().isEmpty())) {
-
-                getXorO = gameGrid00;
+                getXorO = vsPcGameForm_p20.getText();
                 System.out.println("Winner");
                 isPlayerWin = true;
             } else if ((vsPcGameForm_p00.getText().equals(vsPcGameForm_p11.getText())) && (vsPcGameForm_p00.getText().equals(vsPcGameForm_p22.getText())) && (!vsPcGameForm_p00.getText().isEmpty())) {
-
-                getXorO = gameGrid00;
+                getXorO = vsPcGameForm_p00.getText();
                 System.out.println("Winner");
                 isPlayerWin = true;
             }
-            //boolean x = true;
         }
-        return isPlayerWin;
+        if (xoCounter == 8 && isPlayerWin == false) {  // game ended without any winner 
+            Alert a = new Alert(Alert.AlertType.INFORMATION, "Game ended without any winner......");
+            a.show();
+            xoCounter = 0;
+        } else {
+            if (isPlayerWin == true) {
+                if (getXorO == "X") {
+                    System.out.println("X is  winner");
+                  //  playWithFriendForm.setVisible(false);
+                  //  winForm.setVisible(true); 
+                  //  Media media = new Media(new File("/Images/win.mp4").toURI().toString());  
+                  //  MediaPlayer mediaPlayer = new MediaPlayer(media); 
+                   // WinMediaPlayer.setMediaPlayer(mediaPlayer);
+                   // mediaPlayer.setAutoPlay(true);
+                   // WinMediaPlayer = new MediaView(mediaPlayer);
+                    //MediaView mediaView = new MediaView(mediaPlayer);  
+     
+        
+                    
+                } else {
+                    System.out.println("O is  winner");
+                   // playWithFriendForm.setVisible(false);
+                  //  winForm.setVisible(true);
+                }
+            }
+        }
+//        return isPlayerWin;
     }
 
     private void clearToPlayAgain(boolean x, ActionEvent event) {
-
+/*
         if (x == true) {
             System.out.println("Win");
             try {
@@ -487,6 +578,7 @@ public class ScenesController {
                 e.printStackTrace();
             }
         }
+        */
 
     }
     /*
