@@ -64,19 +64,26 @@ public class AvialableListController {
 
                 JSONParser jsonParser = new JSONParser();
                 System.out.println("xxxxxxxxxx" + str);
-                JSONObject jsonObject = (JSONObject) jsonParser.parse(str);
-                JSONArray jsonArray = (JSONArray) jsonObject.get("AvaliableList");
-                //Iterating the contents of the array
-                Iterator<String> iterator = jsonArray.iterator();
-                while (iterator.hasNext()) {
-                    //  System.out.println(iterator.next());
-                    playerOnline.add(iterator.next());
-                }
+               
+                    JSONObject jsonObject = (JSONObject) jsonParser.parse(str);
+                    JSONArray jsonArray = (JSONArray) jsonObject.get("AvaliableList");
+
+                    //Iterating the contents of the array
+                    Iterator<String> iterator = jsonArray.iterator();
+                    while (iterator.hasNext()) {
+                        //  System.out.println(iterator.next());
+                        playerOnline.add(iterator.next());
+                    }
+                
+
             }
         } catch (IOException ex) {
-            Logger.getLogger(AvialableListController.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(AvialableListController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("io: No available list!");
+
         } catch (ParseException ex) {
-            Logger.getLogger(AvialableListController.class.getName()).log(Level.SEVERE, null, ex);
+            // Logger.getLogger(AvialableListController.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("parse: No available list!");
         }
 
         return playerOnline;
