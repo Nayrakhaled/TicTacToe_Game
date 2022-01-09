@@ -16,9 +16,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -30,6 +32,10 @@ public class ListController implements Initializable {
     private ListView listView;
     private int result;
     private String aganist;
+    private AnchorPane availableForm;
+    private AnchorPane playRequestForm;
+    private Button btnAccept;
+    private Button btnReject;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -70,7 +76,9 @@ public class ListController implements Initializable {
     }
 
     private void showConfirmation() {
-
+         availableForm.setVisible(false);
+        playRequestForm.setVisible(true);
+        /*
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Select");
         alert.setHeaderText("Choose the sport you like:");
@@ -92,6 +100,7 @@ public class ListController implements Initializable {
             System.out.println("rejectttttttttttt");
 
         }
+        */
     }
 
 }

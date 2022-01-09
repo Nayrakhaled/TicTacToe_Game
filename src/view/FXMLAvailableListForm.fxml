@@ -6,37 +6,65 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Circle fill="#1f93ff0a" layoutX="31.0" layoutY="40.0" radius="21.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fx:id="imgUser" fitHeight="30.0" fitWidth="33.0" layoutX="14.0" layoutY="25.0">
-         <image>
-            <Image url="@../Images/user.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="lblUserName" layoutX="57.0" layoutY="25.0" text="User Name">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblPoints" layoutX="57.0" layoutY="44.0" text="Points" />
-      <Label fx:id="labelAViewAvailable" layoutX="180.0" layoutY="36.0" text="Available List">
-         <font>
-            <Font name="System Bold Italic" size="32.0" />
-         </font>
-      </Label>
-      <Button fx:id="AvailablList_btnBack" layoutX="537.0" layoutY="22.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="51.0">
-         <graphic>
-            <ImageView fx:id="AvailableList_Back_Img" fitHeight="28.0" fitWidth="39.0">
+      <AnchorPane fx:id="availableForm" layoutX="10.0" layoutY="10.0" prefHeight="450.0" prefWidth="600.0">
+         <children>
+            <Circle fill="#1f93ff0a" layoutX="32.0" layoutY="31.0" radius="21.0" stroke="BLACK" strokeType="INSIDE" />
+            <ImageView fx:id="imgUser" fitHeight="30.0" fitWidth="33.0" layoutX="16.0" layoutY="16.0">
+               <image>
+                  <Image url="@../Images/user.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblUserName" layoutX="61.0" layoutY="8.0" text="User Name">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblPoints" layoutX="66.0" layoutY="25.0" text="Points" />
+            <Label fx:id="labelAViewAvailable" layoutX="194.0" layoutY="23.0" text="Available List">
+               <font>
+                  <Font name="System Bold Italic" size="32.0" />
+               </font>
+            </Label>
+            <Button fx:id="AvailablList_btnBack" layoutX="526.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="51.0" />
+            <ListView fx:id="listView" layoutX="161.0" layoutY="78.0" prefHeight="345.0" prefWidth="263.0" />
+            <ImageView fx:id="AvailableList_Back_Img" fitHeight="28.0" fitWidth="39.0" layoutX="532.0" layoutY="3.0">
                <image>
                   <Image url="@../Images/back.png" />
                </image>
             </ImageView>
-         </graphic>
-      </Button>
-      <ListView fx:id="listView" layoutX="153.0" layoutY="92.0" prefHeight="345.0" prefWidth="287.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="playRequestForm" prefHeight="450.0" prefWidth="600.0" visible="false">
+         <children>
+            <Rectangle arcHeight="90.0" arcWidth="90.0" fill="#ffffff00" height="221.0" layoutX="92.0" layoutY="104.0" stroke="BLACK" strokeType="INSIDE" width="462.0" />
+            <Label alignment="CENTER" layoutX="125.0" layoutY="120.0" prefHeight="86.0" prefWidth="396.0" text="Someone wants to play with you...">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Pane layoutX="161.0" layoutY="234.0" prefHeight="69.0" prefWidth="295.0">
+               <children>
+                  <Button fx:id="btnAccept" layoutX="33.0" layoutY="11.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" text="Accept">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnReject" layoutX="138.0" layoutY="11.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="99.0" text="Reject">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
