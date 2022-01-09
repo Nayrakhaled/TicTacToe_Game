@@ -49,22 +49,24 @@ public class ListController implements Initializable {
         listView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 RequestGameController requestPlay = new RequestGameController(ScenesController.socket);
                 aganist = observable.getValue().toString();
                 System.out.println("Aganist" + aganist);
                 result = requestPlay.AlertRequest(ScenesController.playerOnline.getUserName(), aganist);
+                if (result == 1) {
+                    if (!ScenesController.playerOnline.getUserName().equals(aganist)) {
+                        //Alert
+                        showConfirmation();
+
+                    } else {
+                        // Alert to wait response
+                        showConfirmation();
+                    }
+                }
+
             }
         });
-        if (result == 1) {
-            if (!ScenesController.playerOnline.getUserName().equals(aganist)) {
-                //Alert
-                showConfirmation();
-            } else {
-                // Alert to wait response
-                showConfirmation();
-            }
-        }
+
     }
 
     private void showConfirmation() {

@@ -292,7 +292,7 @@ public class ScenesController {
                 System.out.println("player online" );
 
             } else if (check == -1) {
-                errorlogin_label.setText("");
+                //errorlogin_label.setText("");
                 errorlogin_label.setVisible(true);
                 errorlogin_label.setText("Username Not Exist");
             } else if (check == 0) {
