@@ -124,6 +124,10 @@ public class ScenesController {
     @FXML
     private MediaView WinMediaPlayer;
     
+    private MediaPlayer mediaPlayer;
+    private Media media;
+
+    
 
     @FXML
     Hyperlink test;
@@ -466,7 +470,12 @@ public class ScenesController {
                     System.out.println("X is  winner");
                     playWithFriendForm.setVisible(false);
                     withFreindWin.setVisible(true); 
-                  //  Media media = new Media(new File("/Images/win.mp4").toURI().toString());  
+                  //  Media media = new Media(new File("/Images/win.mp4").toURI().toString());
+                  String path = new File("src/Images/win.mp4").getAbsolutePath();
+                  media = new Media(new File(path).toURI().toString());
+                  mediaPlayer = new MediaPlayer(media);
+                  WinMediaPlayer.setMediaPlayer(mediaPlayer);
+                  mediaPlayer.setAutoPlay(true);
                   //  MediaPlayer mediaPlayer = new MediaPlayer(media); 
                   //  WinMediaPlayer.setMediaPlayer(mediaPlayer);
                   //  mediaPlayer.setAutoPlay(true);
