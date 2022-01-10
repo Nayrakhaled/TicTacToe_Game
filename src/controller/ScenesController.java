@@ -355,6 +355,7 @@ public class ScenesController {
     }
 
     public void availableList(ActionEvent event) {
+        System.out.println("FXML");
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLAvailableListForm.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

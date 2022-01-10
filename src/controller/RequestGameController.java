@@ -45,7 +45,6 @@ public class RequestGameController {
              JSONObject file = new JSONObject();
             file.put("Key", "requsetPlay");
             JSONObject obj = new JSONObject();
-            obj.put("player", player);
             obj.put("aganist", aganist);
            
             file.put("value", obj);

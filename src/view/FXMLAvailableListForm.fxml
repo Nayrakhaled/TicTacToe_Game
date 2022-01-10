@@ -11,10 +11,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListController">
    <children>
-      <AnchorPane fx:id="availableForm" layoutX="10.0" layoutY="10.0" prefHeight="450.0" prefWidth="600.0">
+      <AnchorPane fx:id="availableForm" prefHeight="450.0" prefWidth="600.0">
          <children>
             <Circle fill="#1f93ff0a" layoutX="32.0" layoutY="31.0" radius="21.0" stroke="BLACK" strokeType="INSIDE" />
             <ImageView fx:id="imgUser" fitHeight="30.0" fitWidth="33.0" layoutX="16.0" layoutY="16.0">
@@ -33,9 +32,9 @@
                   <Font name="System Bold Italic" size="32.0" />
                </font>
             </Label>
-            <Button fx:id="AvailablList_btnBack" layoutX="526.0" layoutY="-4.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="51.0" />
+            <Button fx:id="AvailablList_btnBack" layoutX="526.0" layoutY="13.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="51.0" />
             <ListView fx:id="listView" layoutX="161.0" layoutY="78.0" prefHeight="345.0" prefWidth="263.0" />
-            <ImageView fx:id="AvailableList_Back_Img" fitHeight="28.0" fitWidth="39.0" layoutX="532.0" layoutY="3.0">
+            <ImageView fx:id="AvailableList_Back_Img" fitHeight="28.0" fitWidth="39.0" layoutX="532.0" layoutY="17.0">
                <image>
                   <Image url="@../Images/back.png" />
                </image>

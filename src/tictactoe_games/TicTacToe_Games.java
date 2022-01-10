@@ -10,6 +10,14 @@ import javafx.stage.StageStyle;
 
 public class TicTacToe_Games extends Application {
     
+    private static Stage stageX;
+
+    public static Stage getStageX() {
+        return stageX;
+    }
+    
+    
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLHome.fxml"));
@@ -17,6 +25,7 @@ public class TicTacToe_Games extends Application {
         stage.setScene(scene);
         stage.setTitle("TieTacToe Game");
         stage.initStyle(StageStyle.UTILITY);
+        stageX = stage;
         stage.show();
     }
 

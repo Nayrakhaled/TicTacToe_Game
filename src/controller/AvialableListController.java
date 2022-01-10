@@ -44,6 +44,7 @@ public class AvialableListController {
         } catch (IOException ex) {
             Logger.getLogger(AvialableListController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("AvaliableList in game frist");
 
         JSONObject file = new JSONObject();
         file.put("Key", "AvialableList");
@@ -71,7 +72,7 @@ public class AvialableListController {
                     //Iterating the contents of the array
                     Iterator<String> iterator = jsonArray.iterator();
                     while (iterator.hasNext()) {
-                        //  System.out.println(iterator.next());
+                         // System.out.println(iterator.next());
                         playerOnline.add(iterator.next());
                     }
                 
