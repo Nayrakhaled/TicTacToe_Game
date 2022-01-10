@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -54,20 +55,31 @@ public class ListController implements Initializable {
                 System.out.println("Aganist" + aganist);
                 result = requestPlay.AlertRequest(ScenesController.playerOnline.getUserName(), aganist);
                 if (result == 1) {
-                    if (!ScenesController.playerOnline.getUserName().equals(aganist)) {
-                        //Alert
-                        showConfirmation();
 
-                    } else {
-                        // Alert to wait response
-                        showConfirmation();
-                    }
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (ScenesController.playerOnline.getUserName().equals(aganist)) {
+                                //Alert
+                                Platform.runLater(() -> {
+                                    showConfirmation();
+                                });
+
+                            } else {
+                                // Alert to wait response
+                                showConfirmation();
+                            }
+                        }
+                    });
+
                 }
 
             }
         });
 
     }
+    
+    
 
     private void showConfirmation() {
 
