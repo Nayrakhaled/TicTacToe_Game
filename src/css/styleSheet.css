@@ -1,0 +1,19 @@
+.root{
+    -fx-background-color :#7B113A;
+
+}
+Label{
+    -fx-text-fill :#FFFFFF;
+    -fx-font-family:"Times New Roman";
+    
+}
+Button{
+   -fx-background-color : #FFFFFF;
+   -fx-font-family:"Times New Roman";
+}
+Hyperlink{
+     -fx-background-color : #FFFFFF;
+}
+.VSFriend_UserName{
+     -fx-text-fill :#212121;
+}
