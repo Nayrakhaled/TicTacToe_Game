@@ -17,7 +17,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -43,6 +42,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
 import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
+import tictactoe_games.TicTacToe_Games;
 
 public class ScenesController {
 
@@ -79,7 +79,6 @@ public class ScenesController {
     @FXML
     private Label gameForm1_p10;
 
-    
     // with Computer 
     @FXML
     private Hyperlink vsPcGameForm_p00;
@@ -99,9 +98,6 @@ public class ScenesController {
     private Hyperlink vsPcGameForm_p21;
     @FXML
     private Hyperlink vsPcGameForm_p22;
-    @FXML
-    private AnchorPane withComputerWin;
-    private AnchorPane withComputerForm;
     // Play with friend form
     @FXML
     private AnchorPane playWithFriendForm;
@@ -127,16 +123,9 @@ public class ScenesController {
     private Hyperlink withFriendGameForm_p22;
     @FXML
     private MediaView WinMediaPlayer;
-    @FXML
-    private Label VSFriend_Player1Score;
-    private Label VSFriend_Player2Score;
 
-
-    
     private MediaPlayer mediaPlayer;
     private Media media;
-
-    
 
     @FXML
     Hyperlink test;
@@ -175,11 +164,9 @@ public class ScenesController {
     boolean isPlayerWin = false;
     int xoCounter = 0;
     String initialStart = "X";
-    public static Socket socket;
     HashMap<String, String> pos = new HashMap<String, String>();
 
     public ScenesController() {
-        
 
     }
 
@@ -257,7 +244,8 @@ public class ScenesController {
             e.printStackTrace();
         }
     }
-/*
+
+    /*
     
     public void switchToHomeOnline(ActionEvent event) {// back to change mode(avaliable list to home to change mode 0)
 
@@ -275,7 +263,7 @@ public class ScenesController {
             e.printStackTrace();
         }
     }
-*/
+     */
     public void switchToChooseX_O(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLChoose_X_O.fxml"));
@@ -290,7 +278,8 @@ public class ScenesController {
 
     public void switchToSignup(ActionEvent event) {
         try {
-            socket = new Socket("127.0.0.1", 63000);
+            //socket = new Socket("127.0.0.1", 63000);
+
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLSignup.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
@@ -314,26 +303,28 @@ public class ScenesController {
     }
 
     public void goToAvailableList(ActionEvent event) {
+        RequestToServer request = RequestToServer.createRequest();
+        request.getFromServer();
+        System.out.println(" Socket Open ");
         if (!loginTxt_userName.getText().isEmpty() && !logintxt_password.getText().isEmpty()) {
-            Player player = new Player(loginTxt_userName.getText().trim(), logintxt_password.getText());
-            LoginController enter = new LoginController();
-            int check = enter.checkData(player, socket);
-            System.out.println("Check" + check);
-            if (check == 1) {
-                playerOnline.setUserName(player.getUserName());
-                System.out.println("player online" + playerOnline.getUserName());
-                availableList(event);
-                System.out.println("player online" );
+            
+                Player player = new Player(loginTxt_userName.getText().trim(), logintxt_password.getText());
+                LoginController enter = new LoginController();
+                request.sendToServer(enter.sendData(player));
+                System.out.println("Login start ");
 
-            } else if (check == -1) {
-                //errorlogin_label.setText("");
-                errorlogin_label.setVisible(true);
-                errorlogin_label.setText("Username Not Exist");
-            } else if (check == 0) {
-                //errorlogin_label.setText("");
-                errorlogin_label.setVisible(true);
-                errorlogin_label.setText("Password Not Exist");
-            }
+        }
+    }
+    
+    public void goToList(ActionEvent event){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLAvailableListForm.fxml"));
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(ScenesController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -341,40 +332,31 @@ public class ScenesController {
         if (!registerTxt_userName.getText().isEmpty()
                 && !registertxt_password.getText().isEmpty() && !registerTxt_ComfirmPass.getText().isEmpty()) {
             if (registertxt_password.getText().equals(registerTxt_ComfirmPass.getText())) {
-                Player player = new Player(registerTxt_userName.getText(), registertxt_password.getText(), registerTxt_ComfirmPass.getText());
+                Player player = new Player(loginTxt_userName.getText().trim(), logintxt_password.getText());
+                RequestToServer request = RequestToServer.createRequest();
                 RegieterController enter = new RegieterController();
-                boolean check = enter.checkData(player, socket);
-                if (check == true) {
-                    playerOnline.setUserName(player.getUserName());
-                    System.out.println("player online" + player.getUserName());
-
-                    availableList(event);
-
-                }
-            } else {
-                registerlabel_NotMatch.setText("");
-                registerlabel_NotMatch.setVisible(true);
-                registerlabel_NotMatch.setText("Not Match");
+                request.sendToServer(enter.sendData(player));
+                
             }
-        } else {
-            registerlabel_NotMatch.setText("");
-            registerlabel_NotMatch.setVisible(true);
-            registerlabel_NotMatch.setText("Field is emplty");
         }
     }
 
     public void availableList(ActionEvent event) {
         System.out.println("FXML");
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLAvailableListForm.fxml"));
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
+            Stage stage = new Stage();
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/FXMLAvailableListForm.fxml")));
             stage.setScene(scene);
             stage.show();
+//            Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLAvailableListForm.fxml"));
+//            TicTacToe_Games.getStageX().getScene().setRoot(root);
+//            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
@@ -396,7 +378,7 @@ public class ScenesController {
 
         }
     }
-    
+
     public void play(ActionEvent event) {
         Hyperlink l = (Hyperlink) event.getSource();
         String id = l.getId();
@@ -413,6 +395,7 @@ public class ScenesController {
             xoCounter++;
         }
     }
+
     public void playWithFriend(ActionEvent event) {
         Hyperlink gameSymbol = (Hyperlink) event.getSource();
         String id = gameSymbol.getId();
@@ -430,7 +413,6 @@ public class ScenesController {
         }
     }
 
-    
     public void checkForWinner() {
         String getXorO = null;
 
@@ -480,13 +462,17 @@ public class ScenesController {
                     System.out.println("X is  winner");
                     playWithFriendForm.setVisible(false);
                     withFreindWin.setVisible(true);
-                    //int score = Integer.valueOf(VSFriend_Player1Score.getText()) + 10;
-                   //VSFriend_Player1Score.setText(String.valueOf(score));
-                  String path = new File("src/Images/win.mp4").getAbsolutePath();
-                  media = new Media(new File(path).toURI().toString());
-                  mediaPlayer = new MediaPlayer(media);
-                  WinMediaPlayer.setMediaPlayer(mediaPlayer);
-                  mediaPlayer.setAutoPlay(true); 
+                    //  Media media = new Media(new File("/Images/win.mp4").toURI().toString());
+                    String path = new File("src/Images/win.mp4").getAbsolutePath();
+                    media = new Media(new File(path).toURI().toString());
+                    mediaPlayer = new MediaPlayer(media);
+                    WinMediaPlayer.setMediaPlayer(mediaPlayer);
+                    mediaPlayer.setAutoPlay(true);
+                    //  MediaPlayer mediaPlayer = new MediaPlayer(media); 
+                    //  WinMediaPlayer.setMediaPlayer(mediaPlayer);
+                    //  mediaPlayer.setAutoPlay(true);
+                    // WinMediaPlayer = new MediaView(mediaPlayer);
+                    //MediaView mediaView = new MediaView(mediaPlayer);  
                 } else {
                     System.out.println("O is  winner");
                     playWithFriendForm.setVisible(false);
@@ -494,9 +480,19 @@ public class ScenesController {
                 }
             }
         }
+
     }
-    
+
     public void checkForWinner1() {
+        String gameGrid00 = pos.get("vsPcGameForm_p00");
+        String gameGrid01 = pos.get("vsPcGameForm_p01");
+        String gameGrid02 = pos.get("vsPcGameForm_p02");
+        String gameGrid10 = pos.get("vsPcGameForm_p10");
+        String gameGrid11 = pos.get("vsPcGameForm_p11");
+        String gameGrid12 = pos.get("vsPcGameForm_p12");
+        String gameGrid21 = pos.get("vsPcGameForm_p21");
+        String gameGrid22 = pos.get("vsPcGameForm_p22");
+        String gameGrid20 = pos.get("vsPcGameForm_p20");
         String getXorO = null;
 
         if (xoCounter < 9) { // Game not eneded
@@ -543,119 +539,47 @@ public class ScenesController {
             if (isPlayerWin == true) {
                 if (getXorO == "X") {
                     System.out.println("X is  winner");
-                   withComputerForm.setVisible(false);
-                   withComputerWin.setVisible(true); 
-                  String path = new File("src/Images/win.mp4").getAbsolutePath();
-                  media = new Media(new File(path).toURI().toString());
-                  mediaPlayer = new MediaPlayer(media);
-                  WinMediaPlayer.setMediaPlayer(mediaPlayer);
-                  mediaPlayer.setAutoPlay(true);
+                    //  playWithFriendForm.setVisible(false);
+                    //  winForm.setVisible(true); 
+                    //  Media media = new Media(new File("/Images/win.mp4").toURI().toString());  
+                    //  MediaPlayer mediaPlayer = new MediaPlayer(media); 
+                    // WinMediaPlayer.setMediaPlayer(mediaPlayer);
+                    // mediaPlayer.setAutoPlay(true);
+                    // WinMediaPlayer = new MediaView(mediaPlayer);
+                    //MediaView mediaView = new MediaView(mediaPlayer);  
+
                 } else {
-                    System.out.println("O is winner");
-                    withComputerForm.setVisible(false);
-                    withComputerWin.setVisible(true);
-                   String path = new File("src/Images/win.mp4").getAbsolutePath();
-                  media = new Media(new File(path).toURI().toString());
-                  mediaPlayer = new MediaPlayer(media);
-                  WinMediaPlayer.setMediaPlayer(mediaPlayer);
-                  mediaPlayer.setAutoPlay(true);
+                    System.out.println("O is  winner");
+                    // playWithFriendForm.setVisible(false);
+                    //  winForm.setVisible(true);
                 }
             }
         }
+//        return isPlayerWin;
     }
 
-    public void withFriendPlayAgainGameForm(ActionEvent event) {
-        withFriendClearToPlayAgain();
-        isPlayerWin = false;
-        xoCounter = 0;
-   }
-    
-    public void withFriendPlayAgainWinForm(ActionEvent event) {
-        playWithFriendForm.setVisible(true);
-        withFreindWin.setVisible(false);
-        withFriendClearToPlayAgain();
-        isPlayerWin = false;
-        xoCounter = 0;
-        
-   }
-    
-    public void withFriendClearToPlayAgain() {
-        withFriendGameForm_p00.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playWithFriend(event);
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void clearToPlayAgain(boolean x, ActionEvent event) {
+        /*
+        if (x == true) {
+            System.out.println("Win");
+            try {
+                Thread.sleep(2000);
+                Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLWin.fxml"));
+                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        });
-        withFriendGameForm_p01.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playWithFriend(event);
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-        withFriendGameForm_p02.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playWithFriend(event);
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-        withFriendGameForm_p10.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playWithFriend(event);
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-        withFriendGameForm_p11.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playWithFriend(event);
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-        withFriendGameForm_p12.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playWithFriend(event);
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-        withFriendGameForm_p20.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playWithFriend(event);
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-        withFriendGameForm_p21.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playWithFriend(event);
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-        withFriendGameForm_p22.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                playWithFriend(event);
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-        withFriendGameForm_p00.setText("");
-        withFriendGameForm_p01.setText("");
-        withFriendGameForm_p02.setText("");
-        withFriendGameForm_p10.setText("");
-        withFriendGameForm_p11.setText("");
-        withFriendGameForm_p12.setText("");
-        withFriendGameForm_p20.setText("");
-        withFriendGameForm_p21.setText("");
-        withFriendGameForm_p22.setText("");
-        
-        
-        
-        
+        }
+         */
+
     }
-    
+    /*
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        listviewAvailable.getItems().addAll("11111111111111111", "22222222222222", "333333333333");
+
+    }*/
 }

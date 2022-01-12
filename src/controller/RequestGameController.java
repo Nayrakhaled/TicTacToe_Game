@@ -14,7 +14,8 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
+
 
 /**
  *
@@ -24,8 +25,9 @@ public class RequestGameController {
     private boolean isCheck = false;
     PrintStream printStream;
     DataInputStream dataInputStream;
+    Socket socket;
     
-    public RequestGameController(Socket socket){
+    public RequestGameController(){
         try {
             printStream = new PrintStream(socket.getOutputStream());
             dataInputStream = new DataInputStream(socket.getInputStream());
@@ -43,18 +45,18 @@ public class RequestGameController {
         try {
             
              JSONObject file = new JSONObject();
-            file.put("Key", "requsetPlay");
+           // file.put("Key", "requsetPlay");
             JSONObject obj = new JSONObject();
-            obj.put("aganist", aganist);
+            //obj.put("aganist", aganist);
            
-            file.put("value", obj);
+            //file.put("value", obj);
 
             printStream.println(file);
             System.out.println(file);
             
             String resultOfRequest = dataInputStream.readLine();
             System.out.println("result of client" + resultOfRequest);
-            if(resultOfRequest.equals("false")){
+            if(resultOfRequest.equals("request")){
                 System.out.println("OK........");
                 result = 1;
             }else{
