@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -98,6 +99,9 @@ public class ScenesController {
     private Hyperlink vsPcGameForm_p21;
     @FXML
     private Hyperlink vsPcGameForm_p22;
+    @FXML
+    private AnchorPane withComputerWin;
+    private AnchorPane withComputerForm;
     // Play with friend form
     @FXML
     private AnchorPane playWithFriendForm;
@@ -123,6 +127,11 @@ public class ScenesController {
     private Hyperlink withFriendGameForm_p22;
     @FXML
     private MediaView WinMediaPlayer;
+    @FXML
+    private Label VSFriend_Player1Score;
+    private Label VSFriend_Player2Score;
+
+
     
     private MediaPlayer mediaPlayer;
     private Media media;
@@ -470,18 +479,14 @@ public class ScenesController {
                 if (getXorO == "X") {
                     System.out.println("X is  winner");
                     playWithFriendForm.setVisible(false);
-                    withFreindWin.setVisible(true); 
-                  //  Media media = new Media(new File("/Images/win.mp4").toURI().toString());
+                    withFreindWin.setVisible(true);
+                    //int score = Integer.valueOf(VSFriend_Player1Score.getText()) + 10;
+                   //VSFriend_Player1Score.setText(String.valueOf(score));
                   String path = new File("src/Images/win.mp4").getAbsolutePath();
                   media = new Media(new File(path).toURI().toString());
                   mediaPlayer = new MediaPlayer(media);
                   WinMediaPlayer.setMediaPlayer(mediaPlayer);
-                  mediaPlayer.setAutoPlay(true);
-                  //  MediaPlayer mediaPlayer = new MediaPlayer(media); 
-                  //  WinMediaPlayer.setMediaPlayer(mediaPlayer);
-                  //  mediaPlayer.setAutoPlay(true);
-                   // WinMediaPlayer = new MediaView(mediaPlayer);
-                    //MediaView mediaView = new MediaView(mediaPlayer);  
+                  mediaPlayer.setAutoPlay(true); 
                 } else {
                     System.out.println("O is  winner");
                     playWithFriendForm.setVisible(false);
@@ -489,23 +494,9 @@ public class ScenesController {
                 }
             }
         }
-
     }
     
-    
-    
-    
-    
     public void checkForWinner1() {
-        String gameGrid00 = pos.get("vsPcGameForm_p00");
-        String gameGrid01 = pos.get("vsPcGameForm_p01");
-        String gameGrid02 = pos.get("vsPcGameForm_p02");
-        String gameGrid10 = pos.get("vsPcGameForm_p10");
-        String gameGrid11 = pos.get("vsPcGameForm_p11");
-        String gameGrid12 = pos.get("vsPcGameForm_p12");
-        String gameGrid21 = pos.get("vsPcGameForm_p21");
-        String gameGrid22 = pos.get("vsPcGameForm_p22");
-        String gameGrid20 = pos.get("vsPcGameForm_p20");
         String getXorO = null;
 
         if (xoCounter < 9) { // Game not eneded
@@ -552,49 +543,119 @@ public class ScenesController {
             if (isPlayerWin == true) {
                 if (getXorO == "X") {
                     System.out.println("X is  winner");
-                  //  playWithFriendForm.setVisible(false);
-                  //  winForm.setVisible(true); 
-                  //  Media media = new Media(new File("/Images/win.mp4").toURI().toString());  
-                  //  MediaPlayer mediaPlayer = new MediaPlayer(media); 
-                   // WinMediaPlayer.setMediaPlayer(mediaPlayer);
-                   // mediaPlayer.setAutoPlay(true);
-                   // WinMediaPlayer = new MediaView(mediaPlayer);
-                    //MediaView mediaView = new MediaView(mediaPlayer);  
-     
-        
-                    
+                   withComputerForm.setVisible(false);
+                   withComputerWin.setVisible(true); 
+                  String path = new File("src/Images/win.mp4").getAbsolutePath();
+                  media = new Media(new File(path).toURI().toString());
+                  mediaPlayer = new MediaPlayer(media);
+                  WinMediaPlayer.setMediaPlayer(mediaPlayer);
+                  mediaPlayer.setAutoPlay(true);
                 } else {
-                    System.out.println("O is  winner");
-                   // playWithFriendForm.setVisible(false);
-                  //  winForm.setVisible(true);
+                    System.out.println("O is winner");
+                    withComputerForm.setVisible(false);
+                    withComputerWin.setVisible(true);
+                   String path = new File("src/Images/win.mp4").getAbsolutePath();
+                  media = new Media(new File(path).toURI().toString());
+                  mediaPlayer = new MediaPlayer(media);
+                  WinMediaPlayer.setMediaPlayer(mediaPlayer);
+                  mediaPlayer.setAutoPlay(true);
                 }
             }
         }
-//        return isPlayerWin;
     }
 
-    private void clearToPlayAgain(boolean x, ActionEvent event) {
-/*
-        if (x == true) {
-            System.out.println("Win");
-            try {
-                Thread.sleep(2000);
-                Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLWin.fxml"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
+    public void withFriendPlayAgainGameForm(ActionEvent event) {
+        withFriendClearToPlayAgain();
+        isPlayerWin = false;
+        xoCounter = 0;
+   }
+    
+    public void withFriendPlayAgainWinForm(ActionEvent event) {
+        playWithFriendForm.setVisible(true);
+        withFreindWin.setVisible(false);
+        withFriendClearToPlayAgain();
+        isPlayerWin = false;
+        xoCounter = 0;
+        
+   }
+    
+    public void withFriendClearToPlayAgain() {
+        withFriendGameForm_p00.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-        }
-        */
-
+        });
+        withFriendGameForm_p01.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        withFriendGameForm_p02.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        withFriendGameForm_p10.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        withFriendGameForm_p11.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        withFriendGameForm_p12.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        withFriendGameForm_p20.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        withFriendGameForm_p21.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        withFriendGameForm_p22.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        withFriendGameForm_p00.setText("");
+        withFriendGameForm_p01.setText("");
+        withFriendGameForm_p02.setText("");
+        withFriendGameForm_p10.setText("");
+        withFriendGameForm_p11.setText("");
+        withFriendGameForm_p12.setText("");
+        withFriendGameForm_p20.setText("");
+        withFriendGameForm_p21.setText("");
+        withFriendGameForm_p22.setText("");
+        
+        
+        
+        
     }
-    /*
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        listviewAvailable.getItems().addAll("11111111111111111", "22222222222222", "333333333333");
-
-    }*/
+    
 }
