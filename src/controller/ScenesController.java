@@ -98,6 +98,15 @@ public class ScenesController {
     private Hyperlink vsPcGameForm_p21;
     @FXML
     private Hyperlink vsPcGameForm_p22;
+    @FXML
+    private AnchorPane withComputerWin;
+    @FXML
+    private AnchorPane withComputerForm;
+    @FXML
+    private MediaView pcWinMediaPlayer;
+    @FXML
+    private Label pcXWinLable;
+    private Label pcOWinLable;
     // Play with friend form
     @FXML
     private AnchorPane playWithFriendForm;
@@ -123,6 +132,10 @@ public class ScenesController {
     private Hyperlink withFriendGameForm_p22;
     @FXML
     private MediaView WinMediaPlayer;
+    @FXML
+    private Label withFriendXWinLable;
+    @FXML
+    private Label withFriendOWinLable;
 
     private MediaPlayer mediaPlayer;
     private Media media;
@@ -166,8 +179,34 @@ public class ScenesController {
     String initialStart = "X";
     HashMap<String, String> pos = new HashMap<String, String>();
 
-    public ScenesController() {
-
+    boolean turnFlag = false;
+    Hyperlink game[][] = {{vsPcGameForm_p00, vsPcGameForm_p10, vsPcGameForm_p20}, 
+            {vsPcGameForm_p01, vsPcGameForm_p11, vsPcGameForm_p21}, {vsPcGameForm_p02, vsPcGameForm_p12, vsPcGameForm_p22}};;
+    //Random randam = new Random();
+        String [][] gameBoard = {{"a","a","a"}, {"a","a","a"}, {"a","a","a"}};
+    
+   
+    public void handlecell1(ActionEvent event){
+        //System.out.print(vsPcGameForm_p00.getText().toString());
+        if (vsPcGameForm_p00.getText().isEmpty()) {
+                   vsPcGameForm_p00.setText(initialStart);
+                   game[0][0].setText(initialStart);
+                   gameBoard[0][0] = initialStart;
+                   turnFlag = false;
+                   initialStart= "O";
+                   if(withPcCheckForWinner()== false);
+                    computerTurn(game);
+               }
+    }
+    public void computerTurn(Hyperlink[][] links) {
+        
+        Move move = AIGame.easyAI(gameBoard);
+        if (move.getCol()!= -1) {
+            links[move.getCol()][move.getRow()].setText(initialStart);
+            gameBoard[move.getCol()][move.getRow()] = initialStart;
+            initialStart = "X";
+            turnFlag = true;
+        }
     }
 
     public void switchToPlayVSComputer(ActionEvent event) {
@@ -359,32 +398,13 @@ public class ScenesController {
         }
     }
 
-    @FXML
-    public void Play1(MouseEvent event) {
-
-        Label l1 = (Label) event.getSource();
-        String id = l1.getId();
-        System.out.println(l1);
-        System.out.println(id);
-
-        l1.setText(initialStart);
-        l1.setOnMouseClicked(null);
-        if (initialStart.equals("X")) {
-
-            initialStart = "O";
-        } else {
-
-            initialStart = "X";
-
-        }
-    }
 
     public void play(ActionEvent event) {
         Hyperlink l = (Hyperlink) event.getSource();
         String id = l.getId();
         l.setText(initialStart);
         l.setOnAction(null);
-        //checkForWinner1();
+        //withPcCheckForWinner();
         if (initialStart.equals("X")) {
             l.setTextFill(Color.RED);
             initialStart = "O";
@@ -395,13 +415,12 @@ public class ScenesController {
             xoCounter++;
         }
     }
-
     public void playWithFriend(ActionEvent event) {
         Hyperlink gameSymbol = (Hyperlink) event.getSource();
         String id = gameSymbol.getId();
         gameSymbol.setText(initialStart);
         gameSymbol.setOnAction(null);
-        checkForWinner();
+        withFriendCheckForWinner();
         if (initialStart.equals("X")) {
             gameSymbol.setTextFill(Color.RED);
             initialStart = "O";
@@ -413,9 +432,8 @@ public class ScenesController {
         }
     }
 
-    public void checkForWinner() {
+    public void withFriendCheckForWinner() {
         String getXorO = null;
-
         if (xoCounter < 9) { // Game not eneded
             //System.out.print("Game continue");
             if ((withFriendGameForm_p00.getText().equals(withFriendGameForm_p10.getText())) && (withFriendGameForm_p00.getText().equals(withFriendGameForm_p20.getText())) && (!withFriendGameForm_p00.getText().isEmpty())) {
@@ -462,39 +480,29 @@ public class ScenesController {
                     System.out.println("X is  winner");
                     playWithFriendForm.setVisible(false);
                     withFreindWin.setVisible(true);
-                    //  Media media = new Media(new File("/Images/win.mp4").toURI().toString());
+                    String path = new File("src/Images/win.mp4").getAbsolutePath();
+                    media = new Media(new File(path).toURI().toString());
+                    mediaPlayer = new MediaPlayer(media);
+                    WinMediaPlayer.setMediaPlayer(mediaPlayer);
+                    mediaPlayer.setAutoPlay(true); 
+                } else {
+                    System.out.println("O is  winner");
+                    playWithFriendForm.setVisible(false);
+                    withFreindWin.setVisible(true);
+                    withFriendXWinLable.setVisible(false);
+                    withFriendOWinLable.setVisible(true);
                     String path = new File("src/Images/win.mp4").getAbsolutePath();
                     media = new Media(new File(path).toURI().toString());
                     mediaPlayer = new MediaPlayer(media);
                     WinMediaPlayer.setMediaPlayer(mediaPlayer);
                     mediaPlayer.setAutoPlay(true);
-                    //  MediaPlayer mediaPlayer = new MediaPlayer(media); 
-                    //  WinMediaPlayer.setMediaPlayer(mediaPlayer);
-                    //  mediaPlayer.setAutoPlay(true);
-                    // WinMediaPlayer = new MediaView(mediaPlayer);
-                    //MediaView mediaView = new MediaView(mediaPlayer);  
-                } else {
-                    System.out.println("O is  winner");
-                    playWithFriendForm.setVisible(false);
-                    withFreindWin.setVisible(true);
                 }
             }
         }
-
     }
 
-    public void checkForWinner1() {
-        String gameGrid00 = pos.get("vsPcGameForm_p00");
-        String gameGrid01 = pos.get("vsPcGameForm_p01");
-        String gameGrid02 = pos.get("vsPcGameForm_p02");
-        String gameGrid10 = pos.get("vsPcGameForm_p10");
-        String gameGrid11 = pos.get("vsPcGameForm_p11");
-        String gameGrid12 = pos.get("vsPcGameForm_p12");
-        String gameGrid21 = pos.get("vsPcGameForm_p21");
-        String gameGrid22 = pos.get("vsPcGameForm_p22");
-        String gameGrid20 = pos.get("vsPcGameForm_p20");
+    public boolean withPcCheckForWinner(){
         String getXorO = null;
-
         if (xoCounter < 9) { // Game not eneded
             //System.out.print("Game continue");
             if ((vsPcGameForm_p00.getText().equals(vsPcGameForm_p10.getText())) && (vsPcGameForm_p00.getText().equals(vsPcGameForm_p20.getText())) && (!vsPcGameForm_p00.getText().isEmpty())) {
@@ -539,47 +547,189 @@ public class ScenesController {
             if (isPlayerWin == true) {
                 if (getXorO == "X") {
                     System.out.println("X is  winner");
-                    //  playWithFriendForm.setVisible(false);
-                    //  winForm.setVisible(true); 
-                    //  Media media = new Media(new File("/Images/win.mp4").toURI().toString());  
-                    //  MediaPlayer mediaPlayer = new MediaPlayer(media); 
-                    // WinMediaPlayer.setMediaPlayer(mediaPlayer);
-                    // mediaPlayer.setAutoPlay(true);
-                    // WinMediaPlayer = new MediaView(mediaPlayer);
-                    //MediaView mediaView = new MediaView(mediaPlayer);  
+                      Alert a = new Alert(Alert.AlertType.INFORMATION, "Player X is the Winner....");
+                        a.show();
+                        xoCounter = 0;
 
                 } else {
                     System.out.println("O is  winner");
-                    // playWithFriendForm.setVisible(false);
-                    //  winForm.setVisible(true);
+                    Alert a = new Alert(Alert.AlertType.INFORMATION, "Player O is the Winner....");
+                    a.show();
+                    xoCounter = 0;
                 }
             }
         }
-//        return isPlayerWin;
+        return isPlayerWin;
     }
+    
+    
+     public void withFriendPlayAgainGameForm(ActionEvent event) {
+        withFriendClearToPlayAgain();
+        isPlayerWin = false;
+        xoCounter = 0;
+   }
 
-    private void clearToPlayAgain(boolean x, ActionEvent event) {
-        /*
-        if (x == true) {
-            System.out.println("Win");
-            try {
-                Thread.sleep(2000);
-                Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLWin.fxml"));
-                stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
+    public void withFriendPlayAgainWinForm(ActionEvent event) {
+        playWithFriendForm.setVisible(true);
+        withFreindWin.setVisible(false);
+        withFriendClearToPlayAgain();
+        isPlayerWin = false;
+        xoCounter = 0;
+   }
+    public void withFriendBackWinForm(ActionEvent event) {
+        playWithFriendForm.setVisible(true);
+        withFreindWin.setVisible(false);
+        withFriendGameForm_p00.setOnAction(null);
+        withFriendGameForm_p10.setOnAction(null);
+        withFriendGameForm_p20.setOnAction(null);
+        withFriendGameForm_p10.setOnAction(null);
+        withFriendGameForm_p11.setOnAction(null);
+        withFriendGameForm_p12.setOnAction(null);
+        withFriendGameForm_p20.setOnAction(null);
+        withFriendGameForm_p21.setOnAction(null);
+        withFriendGameForm_p22.setOnAction(null);
+   }
+
+    public void withFriendClearToPlayAgain() {
+        withFriendGameForm_p00.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
             }
-        }
-         */
-
+        });
+        withFriendGameForm_p01.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+            }
+        });
+        withFriendGameForm_p02.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+            }
+        });
+        withFriendGameForm_p10.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+            }
+        });
+        withFriendGameForm_p11.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+            }
+        });
+        withFriendGameForm_p12.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+            }
+        });
+        withFriendGameForm_p20.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+            }
+        });
+        withFriendGameForm_p21.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+            }
+        });
+        withFriendGameForm_p22.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                playWithFriend(event);
+            }
+        });
+        withFriendGameForm_p00.setText("");
+        withFriendGameForm_p01.setText("");
+        withFriendGameForm_p02.setText("");
+        withFriendGameForm_p10.setText("");
+        withFriendGameForm_p11.setText("");
+        withFriendGameForm_p12.setText("");
+        withFriendGameForm_p20.setText("");
+        withFriendGameForm_p21.setText("");
+        withFriendGameForm_p22.setText("");
     }
-    /*
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        listviewAvailable.getItems().addAll("11111111111111111", "22222222222222", "333333333333");
+    public void clearToPlayAgainWinFormWithPc(ActionEvent event){
+        withComputerWin.setVisible(false);
+        withComputerForm.setVisible(true);
+    }
+    public void withPcPlayAgainGameForm(ActionEvent event) {
+        withPcClearToPlayAgain();
+        isPlayerWin = false;
+        xoCounter = 0;
+   }
+    
+    public void withPcClearToPlayAgain() {
+        vsPcGameForm_p00.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                handlecell1(event);
+            }
+        });
+        vsPcGameForm_p10.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            }
+        });
+        vsPcGameForm_p20.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            }
+        });
+        vsPcGameForm_p10.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            }
+        });
+        vsPcGameForm_p11.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            }
+        });
+        vsPcGameForm_p12.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            }
+        });
+        vsPcGameForm_p20.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+              
+            }
+        });
+        vsPcGameForm_p21.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            }
+        });
+        vsPcGameForm_p22.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+            }
+        });
+        vsPcGameForm_p00.setText("");
+        vsPcGameForm_p10.setText("");
+        vsPcGameForm_p20.setText("");
+        vsPcGameForm_p10.setText("");
+        vsPcGameForm_p11.setText("");
+        vsPcGameForm_p12.setText("");
+        vsPcGameForm_p20.setText("");
+        vsPcGameForm_p21.setText("");
+        vsPcGameForm_p22.setText("");
+    }
+    
 
-    }*/
 }
