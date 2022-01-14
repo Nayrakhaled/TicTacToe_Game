@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChooseXO">
+   <children>
+      <Label fx:id="ChooseX_O_Label" layoutX="220.0" layoutY="129.0" prefHeight="35.0" prefWidth="161.0" text="Choose x or O">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="ChooseX_O_Lable_Qestion" contentDisplay="CENTER" layoutX="116.0" layoutY="164.0" prefHeight="61.0" prefWidth="418.0" text="Would you like to play with X or O?">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="Choose_X_O_btn_x" layoutX="154.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToPlayVSComputer" prefHeight="55.0" prefWidth="95.0" text="X">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="Choose_X_O_btn_O" layoutX="347.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToPlayVSFriend" prefHeight="55.0" prefWidth="104.0" text="O">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="ChooseX_O_btnBack" layoutX="55.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchToHome">
+         <graphic>
+            <ImageView fx:id="ChooseX_O_backButtonImg" fitHeight="28.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

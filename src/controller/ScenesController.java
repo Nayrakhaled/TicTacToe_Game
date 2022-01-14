@@ -51,96 +51,46 @@ public class ScenesController {
     private Parent parent;
 
     //Registration Form Component
-    @FXML
     private TextField registerTxt_userName;
     private Label errorlogin_label;
-    @FXML
     private PasswordField registertxt_password;
-    @FXML
     private PasswordField registerTxt_ComfirmPass;
     private ImageView registerLogo;
-    @FXML
-    private Circle Online_CirclePlayer1;
-    @FXML
-    private Circle Online_CirclePlayer2;
-    // @FXML
-    //private  Label VSComputer;
-    @FXML
-    private Button Online_btnRecordung;
     private ImageView Online_RecordIImage;
-    @FXML
-    private ImageView OnlinePlayer1Image;
-    @FXML
-    private Label OnlinePlayer1UserName;
     private Label OnlinePlayer1Score;
-    // Game Fom
-    @FXML
-    private Label gameForm1_p00;
-    @FXML
-    private Label gameForm1_p10;
 
     // with Computer 
-    @FXML
     private Hyperlink vsPcGameForm_p00;
-    @FXML
     private Hyperlink vsPcGameForm_p01;
-    @FXML
     private Hyperlink vsPcGameForm_p02;
-    @FXML
     private Hyperlink vsPcGameForm_p10;
-    @FXML
     private Hyperlink vsPcGameForm_p11;
-    @FXML
     private Hyperlink vsPcGameForm_p12;
-    @FXML
     private Hyperlink vsPcGameForm_p20;
-    @FXML
     private Hyperlink vsPcGameForm_p21;
-    @FXML
     private Hyperlink vsPcGameForm_p22;
-    @FXML
     private AnchorPane withComputerWin;
-    @FXML
     private AnchorPane withComputerForm;
-    @FXML
-    private MediaView pcWinMediaPlayer;
-    @FXML
-    private Label pcXWinLable;
     private Label pcOWinLable;
     // Play with friend form
-    @FXML
     private AnchorPane playWithFriendForm;
-    @FXML
     private AnchorPane withFreindWin;
-    @FXML
     private Hyperlink withFriendGameForm_p00;
-    @FXML
     private Hyperlink withFriendGameForm_p01;
-    @FXML
     private Hyperlink withFriendGameForm_p02;
-    @FXML
     private Hyperlink withFriendGameForm_p10;
-    @FXML
     private Hyperlink withFriendGameForm_p11;
-    @FXML
     private Hyperlink withFriendGameForm_p12;
-    @FXML
     private Hyperlink withFriendGameForm_p20;
-    @FXML
     private Hyperlink withFriendGameForm_p21;
-    @FXML
     private Hyperlink withFriendGameForm_p22;
-    @FXML
     private MediaView WinMediaPlayer;
-    @FXML
     private Label withFriendXWinLable;
-    @FXML
     private Label withFriendOWinLable;
 
     private MediaPlayer mediaPlayer;
     private Media media;
 
-    @FXML
     Hyperlink test;
 
     @FXML
@@ -148,8 +98,6 @@ public class ScenesController {
     @FXML
     private TextField logintxt_password;
 
-    @FXML
-    private Label registerlabel_NotMatch;
 
     // other component
     private Hyperlink gameForm_p00;
@@ -180,28 +128,41 @@ public class ScenesController {
     HashMap<String, String> pos = new HashMap<String, String>();
 
     boolean turnFlag = false;
-    Hyperlink game[][] = {{vsPcGameForm_p00, vsPcGameForm_p10, vsPcGameForm_p20}, 
-            {vsPcGameForm_p01, vsPcGameForm_p11, vsPcGameForm_p21}, {vsPcGameForm_p02, vsPcGameForm_p12, vsPcGameForm_p22}};;
+    Hyperlink game[][] = {{vsPcGameForm_p00, vsPcGameForm_p10, vsPcGameForm_p20},
+    {vsPcGameForm_p01, vsPcGameForm_p11, vsPcGameForm_p21}, {vsPcGameForm_p02, vsPcGameForm_p12, vsPcGameForm_p22}};
+    ;
     //Random randam = new Random();
-        String [][] gameBoard = {{"a","a","a"}, {"a","a","a"}, {"a","a","a"}};
-    
-   
-    public void handlecell1(ActionEvent event){
+        String[][] gameBoard = {{"a", "a", "a"}, {"a", "a", "a"}, {"a", "a", "a"}};
+    @FXML
+    private Label ChooseX_O_Label;
+    @FXML
+    private Label ChooseX_O_Lable_Qestion;
+    @FXML
+    private Button Choose_X_O_btn_x;
+    @FXML
+    private Button Choose_X_O_btn_O;
+    @FXML
+    private Button ChooseX_O_btnBack;
+    @FXML
+    private ImageView ChooseX_O_backButtonImg;
+
+    public void handlecell1(ActionEvent event) {
         //System.out.print(vsPcGameForm_p00.getText().toString());
         if (vsPcGameForm_p00.getText().isEmpty()) {
-                   vsPcGameForm_p00.setText(initialStart);
-                   game[0][0].setText(initialStart);
-                   gameBoard[0][0] = initialStart;
-                   turnFlag = false;
-                   initialStart= "O";
-                   if(withPcCheckForWinner()== false);
-                    computerTurn(game);
-               }
+            vsPcGameForm_p00.setText(initialStart);
+            game[0][0].setText(initialStart);
+            gameBoard[0][0] = initialStart;
+            turnFlag = false;
+            initialStart = "O";
+            if (withPcCheckForWinner() == false);
+            computerTurn(game);
+        }
     }
+
     public void computerTurn(Hyperlink[][] links) {
-        
+
         Move move = AIGame.easyAI(gameBoard);
-        if (move.getCol()!= -1) {
+        if (move.getCol() != -1) {
             links[move.getCol()][move.getRow()].setText(initialStart);
             gameBoard[move.getCol()][move.getRow()] = initialStart;
             initialStart = "X";
@@ -209,6 +170,7 @@ public class ScenesController {
         }
     }
 
+    @FXML
     public void switchToPlayVSComputer(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLPlayWithComputer.fxml"));
@@ -222,6 +184,7 @@ public class ScenesController {
         }
     }
 
+    @FXML
     public void switchToPlayVSFriend(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLPlayWithFriend.fxml"));
@@ -272,6 +235,7 @@ public class ScenesController {
         }
     }
 
+    @FXML
     public void switchToHome(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLHome.fxml"));
@@ -345,17 +309,17 @@ public class ScenesController {
         RequestToServer request = RequestToServer.createRequest();
         request.getFromServer();
         System.out.println(" Socket Open ");
+        System.out.println("ussername" + loginTxt_userName.getText());
         if (!loginTxt_userName.getText().isEmpty() && !logintxt_password.getText().isEmpty()) {
-            
-                Player player = new Player(loginTxt_userName.getText().trim(), logintxt_password.getText());
-                LoginController enter = new LoginController();
-                request.sendToServer(enter.sendData(player));
-                System.out.println("Login start ");
-
+            Player player = new Player("hhgg", "123654");
+            LoginController enter = new LoginController();
+            request.sendToServer(enter.sendData(player));
+            System.out.println("Login start ");
+            playerOnline.setUserName(loginTxt_userName.getText().trim());
         }
     }
-    
-    public void goToList(ActionEvent event){
+
+    public void goToList(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLAvailableListForm.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -375,7 +339,7 @@ public class ScenesController {
                 RequestToServer request = RequestToServer.createRequest();
                 RegieterController enter = new RegieterController();
                 request.sendToServer(enter.sendData(player));
-                
+                playerOnline.setUserName(registerTxt_userName.getText().trim());
             }
         }
     }
@@ -398,7 +362,6 @@ public class ScenesController {
         }
     }
 
-
     public void play(ActionEvent event) {
         Hyperlink l = (Hyperlink) event.getSource();
         String id = l.getId();
@@ -415,6 +378,7 @@ public class ScenesController {
             xoCounter++;
         }
     }
+
     public void playWithFriend(ActionEvent event) {
         Hyperlink gameSymbol = (Hyperlink) event.getSource();
         String id = gameSymbol.getId();
@@ -484,7 +448,7 @@ public class ScenesController {
                     media = new Media(new File(path).toURI().toString());
                     mediaPlayer = new MediaPlayer(media);
                     WinMediaPlayer.setMediaPlayer(mediaPlayer);
-                    mediaPlayer.setAutoPlay(true); 
+                    mediaPlayer.setAutoPlay(true);
                 } else {
                     System.out.println("O is  winner");
                     playWithFriendForm.setVisible(false);
@@ -501,7 +465,7 @@ public class ScenesController {
         }
     }
 
-    public boolean withPcCheckForWinner(){
+    public boolean withPcCheckForWinner() {
         String getXorO = null;
         if (xoCounter < 9) { // Game not eneded
             //System.out.print("Game continue");
@@ -547,9 +511,9 @@ public class ScenesController {
             if (isPlayerWin == true) {
                 if (getXorO == "X") {
                     System.out.println("X is  winner");
-                      Alert a = new Alert(Alert.AlertType.INFORMATION, "Player X is the Winner....");
-                        a.show();
-                        xoCounter = 0;
+                    Alert a = new Alert(Alert.AlertType.INFORMATION, "Player X is the Winner....");
+                    a.show();
+                    xoCounter = 0;
 
                 } else {
                     System.out.println("O is  winner");
@@ -561,13 +525,12 @@ public class ScenesController {
         }
         return isPlayerWin;
     }
-    
-    
-     public void withFriendPlayAgainGameForm(ActionEvent event) {
+
+    public void withFriendPlayAgainGameForm(ActionEvent event) {
         withFriendClearToPlayAgain();
         isPlayerWin = false;
         xoCounter = 0;
-   }
+    }
 
     public void withFriendPlayAgainWinForm(ActionEvent event) {
         playWithFriendForm.setVisible(true);
@@ -575,7 +538,8 @@ public class ScenesController {
         withFriendClearToPlayAgain();
         isPlayerWin = false;
         xoCounter = 0;
-   }
+    }
+
     public void withFriendBackWinForm(ActionEvent event) {
         playWithFriendForm.setVisible(true);
         withFreindWin.setVisible(false);
@@ -588,7 +552,7 @@ public class ScenesController {
         withFriendGameForm_p20.setOnAction(null);
         withFriendGameForm_p21.setOnAction(null);
         withFriendGameForm_p22.setOnAction(null);
-   }
+    }
 
     public void withFriendClearToPlayAgain() {
         withFriendGameForm_p00.setOnAction(new EventHandler<ActionEvent>() {
@@ -655,16 +619,18 @@ public class ScenesController {
         withFriendGameForm_p21.setText("");
         withFriendGameForm_p22.setText("");
     }
-    public void clearToPlayAgainWinFormWithPc(ActionEvent event){
+
+    public void clearToPlayAgainWinFormWithPc(ActionEvent event) {
         withComputerWin.setVisible(false);
         withComputerForm.setVisible(true);
     }
+
     public void withPcPlayAgainGameForm(ActionEvent event) {
         withPcClearToPlayAgain();
         isPlayerWin = false;
         xoCounter = 0;
-   }
-    
+    }
+
     public void withPcClearToPlayAgain() {
         vsPcGameForm_p00.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -675,49 +641,49 @@ public class ScenesController {
         vsPcGameForm_p10.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
             }
         });
         vsPcGameForm_p20.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
             }
         });
         vsPcGameForm_p10.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
             }
         });
         vsPcGameForm_p11.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
             }
         });
         vsPcGameForm_p12.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
             }
         });
         vsPcGameForm_p20.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-              
+
             }
         });
         vsPcGameForm_p21.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
             }
         });
         vsPcGameForm_p22.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+
             }
         });
         vsPcGameForm_p00.setText("");
@@ -730,6 +696,5 @@ public class ScenesController {
         vsPcGameForm_p21.setText("");
         vsPcGameForm_p22.setText("");
     }
-    
 
 }
