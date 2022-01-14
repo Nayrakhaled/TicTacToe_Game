@@ -67,7 +67,7 @@ public class RequestGameController {
                 System.out.println("online in class request 2 " + jSONObject.get("player"));
                 System.out.println("vs in class request 2 " + vs);
                 System.out.println("playerOnline in class request 2 " + ScenesController.playerOnline.getUserName());
-                if (!ScenesController.playerOnline.getUserName().equals(vs)) {
+                if (ScenesController.playerOnline.getUserName().equals(vs)) {
                     System.out.println("Have a request ");
                     Platform.runLater(() -> {
                         try {

@@ -32,6 +32,29 @@ public class RequestToServer {
     private PrintStream printStream;
     public static RequestToServer requestToServer = null;
     public static String messageFromTheServer = null;
+    Scene scene;
+    
+    public RequestToServer(){
+    
+        tictactoe_games.TicTacToe_Games.getStageX().setOnCloseRequest((event) -> {
+                try {
+                    JSONObject message = new JSONObject();
+                    message.put("Key", "logout");
+                    message.put("player", ScenesController.playerOnline.getUserName());
+                    message.put("busy", 0);
+                    RequestToServer.createRequest().sendToServer(message);
+                    dataInputStream.close();
+                    printStream.close();
+                    socket.close();
+                    Platform.exit();
+                    System.exit(0);
+                } catch (IOException ex) {
+                    Logger.getLogger(RequestToServer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (JSONException ex) {
+                Logger.getLogger(RequestToServer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            });
+    }
 
     public static RequestToServer createRequest() {
         if (requestToServer == null) {
@@ -66,9 +89,17 @@ public class RequestToServer {
                                 System.out.println("Message from server " + message);
                                 if (message != null) {
                                     requestToServer.getMessageJson(message);
+                                } else {
+                                    System.out.println("error ");
+                                    Platform.runLater(() -> {
+                                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                                        alert.setHeaderText("The server is down.");
+                                        alert.showAndWait();
+                                    });
                                 }
                             } catch (SocketException se) {
                                 try {
+                                    System.out.println("error alert");
                                     dataInputStream.close();
                                     printStream.close();
                                     socket.close();
@@ -136,6 +167,7 @@ public class RequestToServer {
                     if (obj.get("response").toString().equals("1")) {
                         Platform.runLater(() -> {
                             chooseXO();
+
                         });
                     }
                     break;
@@ -167,12 +199,15 @@ public class RequestToServer {
             System.out.println("start chooseXO");
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLChoose_X_O_1.fxml"));
             System.out.println("FinishXO");
-            Scene scene = new Scene(root);
-            TicTacToe_Games.getStageX().setScene(scene);
-            TicTacToe_Games.getStageX().show();
+            scene = new Scene(root);
+            tictactoe_games.TicTacToe_Games.getStageX().setScene(scene);
+            tictactoe_games.TicTacToe_Games.getStageX().show();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+    
+    
 }

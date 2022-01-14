@@ -19,17 +19,17 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="Choose_X_O_btn_x" layoutX="154.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToPlayVSComputer" prefHeight="55.0" prefWidth="95.0" text="X">
+      <Button fx:id="Choose_X_O_btn_x" layoutX="154.0" layoutY="280.0" mnemonicParsing="false"  prefHeight="55.0" prefWidth="95.0" text="X">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="Choose_X_O_btn_O" layoutX="347.0" layoutY="280.0" mnemonicParsing="false" onAction="#switchToPlayVSFriend" prefHeight="55.0" prefWidth="104.0" text="O">
+      <Button fx:id="Choose_X_O_btn_O" layoutX="347.0" layoutY="280.0" mnemonicParsing="false"  prefHeight="55.0" prefWidth="104.0" text="O">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="ChooseX_O_btnBack" layoutX="55.0" layoutY="35.0" mnemonicParsing="false" onAction="#switchToHome">
+      <Button fx:id="ChooseX_O_btnBack" layoutX="55.0" layoutY="35.0" mnemonicParsing="false" >
          <graphic>
             <ImageView fx:id="ChooseX_O_backButtonImg" fitHeight="28.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
