@@ -268,17 +268,17 @@ public class ScenesController {
     public void switchToSignup(ActionEvent event) {
         try {
             //socket = new Socket("127.0.0.1", 63000);
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setTitle("Text Input Dialog");
-            dialog.setHeaderText("Look, a Text Input Dialog");
-            dialog.setContentText("Please enter IP:");
-
-// Traditional way to get the response value.
-            Optional<String> result = dialog.showAndWait();
-            if (result.isPresent()) {
-                request.getFromServer(result.get());
-            }
-
+//            TextInputDialog dialog = new TextInputDialog();
+//            dialog.setTitle("Text Input Dialog");
+//            dialog.setHeaderText("Look, a Text Input Dialog");
+//            dialog.setContentText("Please enter IP:");
+//
+//// Traditional way to get the response value.
+//            Optional<String> result = dialog.showAndWait();
+//            if (result.isPresent()) {
+//                request.getFromServer(result.get());
+//            }
+            request.getFromServer("127.0.0.1");
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLSignup.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);

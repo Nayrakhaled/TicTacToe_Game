@@ -130,10 +130,10 @@ public class RequestToServer {
                     System.out.println("Message of response request");
                     new RequestGameController().sendRequest(message);
                     break;
-                case "responsePlay":
+                case "responseRequest":
                     System.out.println("responseplay" + message);
                     JSONObject obj = new JSONObject(message);
-                    if (obj.get(message).toString().equals("accept")) {
+                    if (obj.get("response").toString().equals("1")) {
                         Platform.runLater(() -> {
                             chooseXO();
                         });
@@ -161,9 +161,9 @@ public class RequestToServer {
 
     private void chooseXO() {
         try {
-            System.out.println("start loading");
+            System.out.println("start chooseXO");
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLChoose_X_O_1.fxml"));
-            System.out.println("Finished");
+            System.out.println("FinishXO");
             Scene scene = new Scene(root);
             TicTacToe_Games.getStageX().setScene(scene);
             TicTacToe_Games.getStageX().show();
