@@ -51,9 +51,9 @@ public class RequestToServer {
 
     }
 
-    public void getFromServer() {
+    public void getFromServer(String ip) {
         try {
-            socket = new Socket("127.0.0.1", 63000);
+            socket = new Socket(ip, 63000);
             if (socket != null) {
                 printStream = new PrintStream(socket.getOutputStream());
                 dataInputStream = new DataInputStream(socket.getInputStream());

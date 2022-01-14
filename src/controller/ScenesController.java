@@ -1,36 +1,26 @@
 package controller;
 
 import Module.Player;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.net.Socket;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.DoubleProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -38,11 +28,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.StrokeType;
 import javafx.stage.Stage;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
-import tictactoe_games.TicTacToe_Games;
 
 public class ScenesController {
 
@@ -98,7 +84,6 @@ public class ScenesController {
     @FXML
     private TextField logintxt_password;
 
-
     // other component
     private Hyperlink gameForm_p00;
     private Hyperlink gameForm_p01;
@@ -126,6 +111,7 @@ public class ScenesController {
     int xoCounter = 0;
     String initialStart = "X";
     HashMap<String, String> pos = new HashMap<String, String>();
+    RequestToServer request = RequestToServer.createRequest();
 
     boolean turnFlag = false;
     Hyperlink game[][] = {{vsPcGameForm_p00, vsPcGameForm_p10, vsPcGameForm_p20},
@@ -282,6 +268,16 @@ public class ScenesController {
     public void switchToSignup(ActionEvent event) {
         try {
             //socket = new Socket("127.0.0.1", 63000);
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Text Input Dialog");
+            dialog.setHeaderText("Look, a Text Input Dialog");
+            dialog.setContentText("Please enter IP:");
+
+// Traditional way to get the response value.
+            Optional<String> result = dialog.showAndWait();
+            if (result.isPresent()) {
+                request.getFromServer(result.get());
+            }
 
             Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLSignup.fxml"));
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -306,8 +302,7 @@ public class ScenesController {
     }
 
     public void goToAvailableList(ActionEvent event) {
-        RequestToServer request = RequestToServer.createRequest();
-        request.getFromServer();
+
         System.out.println(" Socket Open ");
         System.out.println("ussername" + loginTxt_userName.getText());
         if (!loginTxt_userName.getText().isEmpty() && !logintxt_password.getText().isEmpty()) {
