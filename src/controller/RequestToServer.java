@@ -139,6 +139,9 @@ public class RequestToServer {
                         });
                     }
                     break;
+                case "requestMovement":
+                    new PlayOnlineGameSymbolController().resposdGameSymbol(message);
+                    break;
             }
         } catch (JSONException ex) {
             Logger.getLogger(RequestToServer.class.getName()).log(Level.SEVERE, null, ex);
