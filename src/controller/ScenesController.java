@@ -306,7 +306,7 @@ public class ScenesController {
         System.out.println(" Socket Open ");
         System.out.println("ussername" + loginTxt_userName.getText());
         if (!loginTxt_userName.getText().isEmpty() && !logintxt_password.getText().isEmpty()) {
-            Player player = new Player("hhgg", "123654");
+            Player player = new Player(loginTxt_userName.getText().trim(), logintxt_password.getText().trim());
             LoginController enter = new LoginController();
             request.sendToServer(enter.sendData(player));
             System.out.println("Login start ");
@@ -330,7 +330,7 @@ public class ScenesController {
         if (!registerTxt_userName.getText().isEmpty()
                 && !registertxt_password.getText().isEmpty() && !registerTxt_ComfirmPass.getText().isEmpty()) {
             if (registertxt_password.getText().equals(registerTxt_ComfirmPass.getText())) {
-                Player player = new Player(loginTxt_userName.getText().trim(), logintxt_password.getText());
+                Player player = new Player(registerTxt_userName.getText().trim(), registertxt_password.getText().trim());
                 RequestToServer request = RequestToServer.createRequest();
                 RegieterController enter = new RegieterController();
                 request.sendToServer(enter.sendData(player));
