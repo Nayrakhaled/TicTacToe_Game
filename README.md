@@ -6,10 +6,14 @@ Tic Tac Toe is a tidy desktop game that is developed in javaFx,
 
 The home page has three modes of playing, rank list and record list.
 The modes in home page:
+<br>
 1-  online on the same network.
+<br>
 2- offline with two local players.
+<br>
 3- offline with computer and Player.
-
+<br>
+<br>
 The home screen looks like this:
 <br>
 <br>
@@ -41,6 +45,19 @@ two online players looks like.
 <br>
 <br>
 
+Login screen looks like.
+<br>
+<br>
+<img src = "https://drive.google.com/file/d/1RsEZPrdoyfis4hN_Q7nP_mJZF3m4wruc/view?usp=sharing"/>
+<br>
+<br>
+Register screen looks like.
+<br>
+<br>
+<img src = "https://drive.google.com/file/d/1UCeeby4lpE7P2G_ocfsqAf_Ciks9tc2V/view?usp=sharing"/>
+<br>
+<br>
+
 Record list that allows players to watch their playing later.
 
 <br>
@@ -68,8 +85,8 @@ Lose screen:
 <br>
 Teams:
 <br>
-
-1- Asmaa Youssef Boghdady Taher
-2- Hend Hamed Morsy Esmail
-3- Nayra Khaled Abo Elkassem Ali
-4- Nihal yasser khamis
+<br>
+1- Asmaa Youssef Boghdady Taher <br>
+2- Hend Hamed Morsy Esmail <br>
+3- Nayra Khaled Abo Elkassem Ali <br>
+4- Nihal yasser khamis <br>
