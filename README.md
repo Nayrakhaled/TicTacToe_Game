@@ -17,7 +17,7 @@ The modes in home page:
 The home screen looks like this:
 <br>
 <br>
-<img src = "https://drive.google.com/file/d/1ibQjLEG44NEHVBdTQeIer-vJFIzngJFU/view?usp=sharing"/>
+<a href = "https://drive.google.com/file/d/1ibQjLEG44NEHVBdTQeIer-vJFIzngJFU/view?usp=sharing"/>
 <br>
 <br>
 
