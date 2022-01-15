@@ -25,7 +25,7 @@ playing with computer looks like:
 
 <br>
 <br>
-<img src = "https://drive.google.com/file/d/1GByGfCmAdlstqFbk-Al1eOJQu7g1VG5W/view?usp=sharing"/>
+<a href = "https://drive.google.com/file/d/1GByGfCmAdlstqFbk-Al1eOJQu7g1VG5W/view?usp=sharing"> Play with computer </a>
 <br>
 <br>
 
@@ -33,7 +33,7 @@ two local players looks like:
 
 <br>
 <br>
-<img src = "https://drive.google.com/file/d/1yeukM5aDBeCPrxOqe5PoCjsBve76ri49/view?usp=sharing"/>
+<a href = "https://drive.google.com/file/d/1yeukM5aDBeCPrxOqe5PoCjsBve76ri49/view?usp=sharing"> Play with friend </a>
 <br>
 <br>
 
@@ -41,20 +41,20 @@ two online players looks like.
 
 <br>
 <br>
-<img src = "https://drive.google.com/file/d/1Dy1kgUrdmTU7CKI2NnkNCzB5OMFxYf3R/view?usp=sharing"/>
+<a href = "https://drive.google.com/file/d/1Dy1kgUrdmTU7CKI2NnkNCzB5OMFxYf3R/view?usp=sharing"> Two player </a>
 <br>
 <br>
 
 Login screen looks like.
 <br>
 <br>
-<img src = "https://drive.google.com/file/d/1RsEZPrdoyfis4hN_Q7nP_mJZF3m4wruc/view?usp=sharing"/>
+<a href = "https://drive.google.com/file/d/1RsEZPrdoyfis4hN_Q7nP_mJZF3m4wruc/view?usp=sharing"> Login </a>
 <br>
 <br>
 Register screen looks like.
 <br>
 <br>
-<img src = "https://drive.google.com/file/d/1UCeeby4lpE7P2G_ocfsqAf_Ciks9tc2V/view?usp=sharing"/>
+<a href = "https://drive.google.com/file/d/1UCeeby4lpE7P2G_ocfsqAf_Ciks9tc2V/view?usp=sharing"> Register </a>
 <br>
 <br>
 
@@ -62,7 +62,7 @@ Record list that allows players to watch their playing later.
 
 <br>
 <br>
-<img src = "https://drive.google.com/file/d/1FiyZ1VtqgNDRHYe9QxpakYl8BnUU7AYV/view?usp=sharing"/>
+<a href = "https://drive.google.com/file/d/1FiyZ1VtqgNDRHYe9QxpakYl8BnUU7AYV/view?usp=sharing"> Record List </a>
 <br>
 <br>
 
@@ -70,14 +70,14 @@ Rank list that allows players to view their ranking among other players.
 
 <br>
 <br>
-<img src = "https://drive.google.com/file/d/1SngvnpiIA5ap3Vbm8hniu85TpBSkCWPc/view?usp=sharing"/>
+<a href = "https://drive.google.com/file/d/1SngvnpiIA5ap3Vbm8hniu85TpBSkCWPc/view?usp=sharing"> Rank List </a>
 <br>
 <br>
 
 Lose screen:
 <br>
 <br>
-<img src = "https://drive.google.com/file/d/1MbSt1fRaz5Ck7rXQT3rj9W_EEEzctKzo/view?usp=sharing"/>
+<a hrf = "https://drive.google.com/file/d/1MbSt1fRaz5Ck7rXQT3rj9W_EEEzctKzo/view?usp=sharing"> Lose Screen </a>
 <br>
 <br>
 
